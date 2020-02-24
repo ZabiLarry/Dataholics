@@ -10,7 +10,7 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_data_graph"
             android:title="@string/data" />
         <item
             android:id="@+id/nav_slideshow"
@@ -38,7 +38,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_foreground"
+            android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings" />
 
     </group>
