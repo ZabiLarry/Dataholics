@@ -1,4 +1,4 @@
-package com.example.dataholics.ui.tools
+package com.example.dataholics.ui.data
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
 
-class ToolsFragment : Fragment() {
+class DataFragment : Fragment() {
 
-    private lateinit var toolsViewModel: ToolsViewModel
+    private lateinit var dataViewModel: DataViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ToolsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tools, container, false)
-        val textView: TextView = root.findViewById(R.id.text_tools)
-        toolsViewModel.text.observe(this, Observer {
+        dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_data, container, false)
+        val textView: TextView = root.findViewById(R.id.text_data)
+        dataViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -1,13 +1,13 @@
-package com.example.dataholics.ui.gallery
+package com.example.dataholics.ui.export
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GalleryViewModel : ViewModel() {
+class SendViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
+        value = "This is send Fragment"
     }
     val text: LiveData<String> = _text
 }

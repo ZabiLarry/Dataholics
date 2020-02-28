@@ -1,4 +1,4 @@
-package com.example.dataholics.ui.send
+package com.example.dataholics.ui.export
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
 
-class SendFragment : Fragment() {
+class ExportFragment : Fragment() {
 
     private lateinit var sendViewModel: SendViewModel
 
@@ -21,9 +21,9 @@ class SendFragment : Fragment() {
     ): View? {
         sendViewModel =
             ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
+        val root = inflater.inflate(R.layout.fragment_export, container, false)
         val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        sendViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
