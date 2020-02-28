@@ -12,17 +12,17 @@ import com.example.dataholics.R
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var homeViewModel: ProfileViewModel
+    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        profileViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
