@@ -12,18 +12,18 @@ import com.example.dataholics.R
 
 class ExportFragment : Fragment() {
 
-    private lateinit var exportViewModel: ExportViewModel
+    private lateinit var sendViewModel: SendViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        exportViewModel =
-            ViewModelProviders.of(this).get(ExportViewModel::class.java)
+        sendViewModel =
+            ViewModelProviders.of(this).get(SendViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_export, container, false)
-        val textView: TextView = root.findViewById(R.id.text_export)
-        exportViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = root.findViewById(R.id.text_send)
+        sendViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
