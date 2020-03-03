@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="nav_piechart"
+        android:icon="@drawable/ic_pie_chart_black_24dp"
+        android:title="Pie Chart"
+        />
+    <item
+        android:id="nav_histogram"
+        android:icon="@drawable/ic_data_graph"
+        android:title="Histogram"
+        />
+    <item
+        android:id="nav_trends"
+        android:icon="@drawable/ic_trending_up_black_24dp"
+        android:title="Trends"
+        />
+    <item
+        android:id="nav_table"
+        android:icon="@drawable/ic_view_comfy_black_24dp"
+        android:title="Table"
+        />
+</menu>
