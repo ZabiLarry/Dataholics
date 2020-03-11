@@ -5,3 +5,4 @@ Java.gitignore
 *.bin
 app/app.iml
 .idea/caches/build_file_checksums.ser
+local.properties
