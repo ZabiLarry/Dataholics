@@ -17,7 +17,7 @@ class TableBottomFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        tableBottomViewModel = ViewModelProviders.of(this).get(tableBottomViewModel::class.java)
+        tableBottomViewModel = ViewModelProviders.of(this).get(TableBottomViewModel::class.java)
         val root = inflater.inflate(R.layout.bottom_fragment_table, container, false)
         /*val textView: TextView = root.findViewById(R.id.text_histogram)
         histogramBottomViewModel.text.observe(viewLifecycleOwner, Observer {

@@ -17,7 +17,7 @@ class TrendsBottomFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        trendsBottomViewModel = ViewModelProviders.of(this).get(trendsBottomViewModel::class.java)
+        trendsBottomViewModel = ViewModelProviders.of(this).get(TrendsBottomViewModel::class.java)
         val root = inflater.inflate(R.layout.bottom_fragment_trends, container, false)
         /*val textView: TextView = root.findViewById(R.id.text_histogram)
         histogramBottomViewModel.text.observe(viewLifecycleOwner, Observer {
