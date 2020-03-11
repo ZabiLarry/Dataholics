@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
 
-class HistogramBottomFragment : Fragment() {
+class TrendsBottomFragment : Fragment() {
 
-    private lateinit var histogramBottomViewModel: HistogramBottomViewModel
+    private lateinit var trendsBottomViewModel: TrendsBottomViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        histogramBottomViewModel = ViewModelProviders.of(this).get(HistogramBottomViewModel::class.java)
-        val root = inflater.inflate(R.layout.bottom_fragment_histogram, container, false)
+        trendsBottomViewModel = ViewModelProviders.of(this).get(trendsBottomViewModel::class.java)
+        val root = inflater.inflate(R.layout.bottom_fragment_trends, container, false)
         /*val textView: TextView = root.findViewById(R.id.text_histogram)
         histogramBottomViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

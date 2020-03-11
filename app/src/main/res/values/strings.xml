@@ -15,4 +15,8 @@
     <string name="menu_send">Send</string>
     <string name="data">Data</string>
     <string name="export">Export</string>
+    <string name="piechart">Export</string>
+    <string name="histogram">Export</string>
+    <string name="table">Export</string>
+    <string name="trends">Export</string>
 </resources>

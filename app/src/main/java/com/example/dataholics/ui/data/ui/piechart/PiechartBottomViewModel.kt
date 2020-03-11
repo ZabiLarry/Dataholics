@@ -1,13 +1,13 @@
-package com.example.dataholics.ui.settings
+package com.example.dataholics.ui.data.ui.histogram
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SettingsViewModel : ViewModel() {
+class PiechartBottomViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = ""
+        value = "This is bottom piechart Fragment"
     }
     val text: LiveData<String> = _text
 }

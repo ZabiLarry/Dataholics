@@ -1,14 +1,19 @@
 package com.example.dataholics.ui.settings
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SettingsFragment : Fragment() {
 
@@ -26,6 +31,16 @@ class SettingsFragment : Fragment() {
         settingsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        val chooseTime:TextView = root.findViewById(R.id.chooseTime)
+        chooseTime.setOnClickListener{
+            val cal =Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker: TimePicker, hour: Int, minute: Int ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                chooseTime.setText(SimpleDateFormat("HH:mm").format(cal.time))
+            }
+            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
         return root
     }
 }
