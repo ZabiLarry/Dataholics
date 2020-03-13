@@ -1,5 +1,6 @@
 package com.example.dataholics
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -16,10 +17,7 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.transition.Slide
-import com.example.dataholics.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,6 +73,19 @@ class MainActivity : AppCompatActivity() {
         }else{
             super.onBackPressed()
         }
+    }
+    fun shareButton(view: View){
+
+        val message: String = "www.dataholics.yes/downloadlink"
+
+        val target = Intent()
+
+        target.action = Intent.ACTION_SEND
+        target.putExtra(Intent.EXTRA_TEXT, message)
+        target.type = "text/plain"
+
+        startActivity(Intent.createChooser(target, "Please select in which application you'd like to share: "))
+
     }
 }
 
