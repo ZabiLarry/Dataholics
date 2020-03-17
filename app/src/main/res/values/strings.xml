@@ -19,4 +19,5 @@
     <string name="histogram">Export</string>
     <string name="table">Export</string>
     <string name="trends">Export</string>
+    <string name="sleep">Sleep</string>
 </resources>

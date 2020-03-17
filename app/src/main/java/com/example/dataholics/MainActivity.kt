@@ -17,6 +17,9 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.example.dataholics.ui.data.ui.histogram.PiechartBottomFragment
+import com.example.dataholics.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_profile, R.id.nav_data, R.id.nav_settings,
+            setOf(R.id.nav_profile, R.id.nav_data, R.id.nav_input, R.id.nav_settings,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_export), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -64,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun openProfile(view: View) {  }
 
     @Override
     override fun onBackPressed(){
@@ -87,6 +89,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(target, "Please select in which application you'd like to share: "))
 
     }
+}
+
+private fun Any.replace(navHostFragmentContainer: Int, selectedFragment: Fragment) {
+
 }
 
 

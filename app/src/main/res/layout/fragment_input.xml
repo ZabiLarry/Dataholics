@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/start3"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Date:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084" />
+
+    <TextView
+        android:id="@+id/duration2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hour(s)"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/durationTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toEndOf="@+id/durationTime"
+        app:layout_constraintTop_toTopOf="@+id/durationTime"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <TextView
+        android:id="@+id/chooseTimeStart"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="00:00"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/start"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/start"
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <EditText
+        android:id="@+id/durationTime"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="1"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseTimeStart"
+        app:layout_constraintEnd_toEndOf="@+id/duration"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/duration"
+        app:layout_constraintTop_toTopOf="@+id/chooseTimeStart"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <TextView
+        android:id="@+id/start"
+        android:layout_width="120dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="28dp"
+        android:text="Start at:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start3"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <TextView
+        android:id="@+id/start4"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginBottom="440dp"
+        android:text="Activity:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        app:layout_constraintTop_toBottomOf="@+id/durationTime"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <TextView
+        android:id="@+id/start6"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginBottom="156dp"
+        android:text="Company:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayoutCompany"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/gridLayoutCompany"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <TextView
+        android:id="@+id/start5"
+        android:layout_width="120dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="28dp"
+        android:text="Start at:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start3"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="120dp"
+        android:layout_height="31dp"
+        android:text="Duration:"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="@+id/chooseDate"
+        app:layout_constraintTop_toTopOf="@+id/start"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <!--this will be last time inputed-->
+
+
+    <!--this will be 1 hour extra of from as default-->
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start4"
+        app:layout_constraintVertical_bias="0.060000002">
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#00A8F4"
+            android:text="sleep"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#348137"
+            android:text="eating"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#FF5722"
+            android:text="leisure"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#6A10D3"
+            android:text="school"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#07BA96"
+            android:text="paid job"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#FFC107"
+            android:text="hmwork"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#E91E63"
+            android:text="errands"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#1F37BC"
+            android:text="exercise"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#CDDC39"
+            android:text="travel"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#8BC34A"
+            android:text="social"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#9C27B0"
+            android:text="health"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#06D0EA"
+            android:text="dating"
+            android:textSize="23dp" />
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/chooseDate"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="true"
+        android:inputType="date"
+        android:text="0001/01/01"
+        android:textColor="#000000"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/start3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/start3"
+        app:layout_constraintTop_toTopOf="@+id/start3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <GridLayout
+        android:id="@+id/gridLayoutCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start6"
+        app:layout_constraintVertical_bias="0.16000003">
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="alone"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#D3D3D3"
+            android:text="partner"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:backgroundTint="#AAAAAA"
+            android:text="friends"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:backgroundTint="#515151"
+            android:text="family"
+            android:textSize="23dp" />
+
+        <Button
+            android:layout_width="260dp"
+            android:backgroundTint="#808080"
+            android:text="co-workers"
+            android:layout_columnSpan="2"
+            android:textSize="23dp" />
+
+
+
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
