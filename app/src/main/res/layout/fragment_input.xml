@@ -3,8 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#303030">
 
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:backgroundTint="#FF0000"
+        android:onClick="selectChoice"
+        android:text="Add activity"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayoutCompany" />
 
     <TextView
         android:id="@+id/start3"
@@ -12,19 +27,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:text="Date:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.055" />
 
     <TextView
         android:id="@+id/duration2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hour(s)"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="@+id/durationTime"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +54,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:text="00:00"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/start"
@@ -55,6 +70,7 @@
         android:ems="10"
         android:inputType="number"
         android:text="1"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="@+id/chooseTimeStart"
         app:layout_constraintEnd_toEndOf="@+id/duration"
@@ -69,12 +85,12 @@
         android:layout_height="31dp"
         android:layout_marginStart="28dp"
         android:text="Start at:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start3"
-        app:layout_constraintVertical_bias="0.091" />
+        app:layout_constraintVertical_bias="0.042" />
 
     <TextView
         android:id="@+id/start4"
@@ -82,13 +98,20 @@
         android:layout_height="31dp"
         android:layout_marginBottom="440dp"
         android:text="Activity:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/gridLayout"
         app:layout_constraintTop_toBottomOf="@+id/durationTime"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.362" />
+
+
+    <!--this will be last time inputed-->
+
+
+    <!--this will be 1 hour extra of from as default-->
 
     <TextView
         android:id="@+id/start6"
@@ -96,47 +119,28 @@
         android:layout_height="31dp"
         android:layout_marginBottom="156dp"
         android:text="Company:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gridLayoutCompany"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/gridLayoutCompany"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-        app:layout_constraintVertical_bias="0.666" />
-
-    <TextView
-        android:id="@+id/start5"
-        android:layout_width="120dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="28dp"
-        android:text="Start at:"
-        android:textColor="#000000"
-        android:textSize="23dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start3"
-        app:layout_constraintVertical_bias="0.091" />
+        app:layout_constraintVertical_bias="0.287" />
 
     <TextView
         android:id="@+id/duration"
         android:layout_width="120dp"
         android:layout_height="31dp"
         android:text="Duration:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/chooseDate"
         app:layout_constraintTop_toTopOf="@+id/start"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <!--this will be last time inputed-->
-
-
-    <!--this will be 1 hour extra of from as default-->
+        app:layout_constraintVertical_bias="1.0" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -152,73 +156,97 @@
         app:layout_constraintVertical_bias="0.060000002">
 
         <Button
+            android:id="@+id/sleep"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#00A8F4"
             android:text="sleep"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/eating"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#348137"
             android:text="eating"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/leisure"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#FF5722"
             android:text="leisure"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/school"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#6A10D3"
             android:text="school"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/paid_job"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#07BA96"
             android:text="paid job"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/hmwork"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#FFC107"
             android:text="hmwork"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/errands"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#E91E63"
             android:text="errands"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/exercise"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#1F37BC"
             android:text="exercise"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/travel"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#CDDC39"
             android:text="travel"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/social"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#8BC34A"
             android:text="social"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/health"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#9C27B0"
             android:text="health"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/dating"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#06D0EA"
             android:text="dating"
             android:textSize="23dp" />
@@ -234,11 +262,11 @@
         android:focusable="true"
         android:inputType="date"
         android:text="0001/01/01"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="@+id/start3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toEndOf="@+id/start3"
         app:layout_constraintTop_toTopOf="@+id/start3"
         app:layout_constraintVertical_bias="0.0" />
@@ -257,25 +285,33 @@
         app:layout_constraintVertical_bias="0.16000003">
 
         <Button
+            android:id="@+id/alone"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#FFFFFF"
             android:text="alone"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/partner"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#D3D3D3"
             android:text="partner"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/friends"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:backgroundTint="#AAAAAA"
             android:text="friends"
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/family"
             android:layout_width="130dp"
+            android:onClick="selectChoice"
             android:layout_row="1"
             android:layout_column="0"
             android:backgroundTint="#515151"
@@ -283,13 +319,13 @@
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/coworkers"
             android:layout_width="260dp"
+            android:onClick="selectChoice"
+            android:layout_columnSpan="2"
             android:backgroundTint="#808080"
             android:text="co-workers"
-            android:layout_columnSpan="2"
             android:textSize="23dp" />
-
-
 
 
     </GridLayout>
