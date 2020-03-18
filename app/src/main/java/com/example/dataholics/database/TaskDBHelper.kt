@@ -20,7 +20,7 @@ class TaskDBHelper(context: Context) :
 
     private val CREATE_TASK_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
             + COLUMN_TASK_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY + " INTEGER,"
-            + COLUMN_COMPANY + " INTEGER," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "TEXT)")
+            + COLUMN_COMPANY + " INTEGER," + COLUMN_DATE + " INTEGER," + COLUMN_TIME + "INTEGER)")
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -35,9 +35,22 @@ class TaskDBHelper(context: Context) :
     }
 
 
-    fun addTask(activity: Int, company: Int, date: String, time: String) {
+    fun addTask(activity: Int, company: Int, dateAsString: String, time: Int) {
         //Gets the repo to write mode
         val db = writableDatabase
+        val dateAsArray = ArrayList<Int>()
+        val dataAsChar = dateAsString.toCharArray();
+        //YYYY/MM/DD
+        for (i in 1..10){
+            while (i != 4 || i != 7){
+                dateAsArray.add(dataAsChar[i].toInt())
+            }
+        }
+
+        var date: Int = 0
+        for (x in dateAsArray){
+            date = 10 * date + x
+        }
 
         //Mapping all the values to go in
         val values = ContentValues()
@@ -76,15 +89,15 @@ class TaskDBHelper(context: Context) :
 
         var company: Int
         var activity: Int
-        var date: String
-        var time: String
+        var date: Int
+        var time: Int
 
         if (cursor!!.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
+                date = cursor.getInt(cursor.getColumnIndex(COLUMN_DATE))
+                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 
                 task.add(Task(id, company, activity, date, time))
                 cursor.moveToNext()
@@ -103,16 +116,16 @@ class TaskDBHelper(context: Context) :
         var taskID: Int
         var company: Int
         var activity: Int
-        var date: String
-        var time: String
+        var date: Int
+        var time: Int
 
         if (cursor!!.moveToFirst()) {
             while (cursor.isAfterLast == false) {
                 taskID = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_ID))
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
+                date = cursor.getInt(cursor.getColumnIndex(COLUMN_DATE))
+                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 
                 taskList.add(Task(taskID, company, activity, date, time))
                 cursor.moveToNext()
@@ -134,5 +147,6 @@ class TaskDBHelper(context: Context) :
             }
         }
 
-    return activityList}
+        return activityList
+    }
 }
