@@ -211,6 +211,22 @@ class MainActivity : AppCompatActivity() {
         timeCut.append(chooseTimeStart.text.toString()[0])
         timeCut.append(chooseTimeStart.text.toString()[1])
         time = Integer.parseInt(timeCut.toString())
+/*
+        val dateAsArray = ArrayList<Int>()
+        val dataAsChar = dateAsString.toCharArray();
+        //YYYY/MM/DD
+        for (i in 1..10){
+            while (i != 4 || i != 7){
+                dateAsArray.add(dataAsChar[i].toInt())
+            }
+        }
+
+        var date: Int = 0
+        for (x in dateAsArray){
+            date = 10 * date + x
+        }
+
+ */
 
         val taskDBHelper = TaskDBHelper(this.applicationContext)
         date = chooseDate.text.toString()

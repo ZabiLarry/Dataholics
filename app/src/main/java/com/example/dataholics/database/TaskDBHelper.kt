@@ -35,22 +35,9 @@ class TaskDBHelper(context: Context) :
     }
 
 
-    fun addTask(activity: Int, company: Int, dateAsString: String, time: Int) {
+    fun addTask(activity: Int, company: Int, date: Int, time: Int) {
         //Gets the repo to write mode
         val db = writableDatabase
-        val dateAsArray = ArrayList<Int>()
-        val dataAsChar = dateAsString.toCharArray();
-        //YYYY/MM/DD
-        for (i in 1..10){
-            while (i != 4 || i != 7){
-                dateAsArray.add(dataAsChar[i].toInt())
-            }
-        }
-
-        var date: Int = 0
-        for (x in dateAsArray){
-            date = 10 * date + x
-        }
 
         //Mapping all the values to go in
         val values = ContentValues()
