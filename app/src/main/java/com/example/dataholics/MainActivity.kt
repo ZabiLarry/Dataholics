@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     var activity = 0
     var company = 0
-    var date = ""
+    var date = 0
     var time = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -193,12 +193,12 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.family -> {
                 company = 4
-                time = chooseTimeStart.text.toString()
+
                 Toast.makeText(this@MainActivity, time.toString() , Toast.LENGTH_LONG).show()
             }
             R.id.coworkers -> {
                 company = 5
-                date = chooseDate.text.toString()
+
                 Toast.makeText(this@MainActivity, date , Toast.LENGTH_LONG).show()
             }
         }
@@ -211,25 +211,20 @@ class MainActivity : AppCompatActivity() {
         timeCut.append(chooseTimeStart.text.toString()[0])
         timeCut.append(chooseTimeStart.text.toString()[1])
         time = Integer.parseInt(timeCut.toString())
-/*
         val dateAsArray = ArrayList<Int>()
-        val dataAsChar = dateAsString.toCharArray();
+        val dataAsChar = chooseDate.text.toString().toCharArray();
         //YYYY/MM/DD
         for (i in 1..10){
-            while (i != 4 || i != 7){
+            if (i != 4 || i != 7){
                 dateAsArray.add(dataAsChar[i].toInt())
             }
         }
 
-        var date: Int = 0
         for (x in dateAsArray){
             date = 10 * date + x
         }
 
- */
-
         val taskDBHelper = TaskDBHelper(this.applicationContext)
-        date = chooseDate.text.toString()
 
         if (activity == 0 || company == 0) {
             Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
