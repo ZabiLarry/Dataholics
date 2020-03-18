@@ -224,13 +224,15 @@ class MainActivity : AppCompatActivity() {
             date = 10 * date + x
         }
 
+        date = 100 * date + time
+
         val taskDBHelper = TaskDBHelper(this.applicationContext)
 
         if (activity == 0 || company == 0) {
             Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
         } else {
             while (x < Integer.parseInt(durationTime.text.toString())) {
-                taskDBHelper.addTask(activity, company, date, time)
+                taskDBHelper.addTask(activity, company, date)
                 x++
             }
             Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()

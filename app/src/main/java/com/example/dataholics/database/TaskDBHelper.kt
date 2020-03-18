@@ -20,7 +20,7 @@ class TaskDBHelper(context: Context) :
 
     private val CREATE_TASK_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
             + COLUMN_TASK_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY + " INTEGER,"
-            + COLUMN_COMPANY + " INTEGER," + COLUMN_DATE + " INTEGER," + COLUMN_TIME + "INTEGER)")
+            + COLUMN_COMPANY + "INTEGER)")
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -35,16 +35,16 @@ class TaskDBHelper(context: Context) :
     }
 
 
-    fun addTask(activity: Int, company: Int, date: Int, time: Int) {
+    fun addTask(activity: Int, company: Int, date: Int) {
         //Gets the repo to write mode
         val db = writableDatabase
 
         //Mapping all the values to go in
         val values = ContentValues()
+        values.put(COLUMN_TASK_ID, date)
         values.put(COLUMN_ACTIVITY, activity)
         values.put(COLUMN_COMPANY, company)
-        values.put(COLUMN_DATE, date)
-        values.put(COLUMN_TIME, time)
+
 
         //Inserting the new row
         try {
@@ -76,17 +76,15 @@ class TaskDBHelper(context: Context) :
 
         var company: Int
         var activity: Int
-        var date: Int
-        var time: Int
+
 
         if (cursor!!.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getInt(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 
-                task.add(Task(id, company, activity, date, time))
+
+                task.add(Task(id, company, activity))
                 cursor.moveToNext()
 
             }
@@ -103,18 +101,15 @@ class TaskDBHelper(context: Context) :
         var taskID: Int
         var company: Int
         var activity: Int
-        var date: Int
-        var time: Int
 
         if (cursor!!.moveToFirst()) {
             while (cursor.isAfterLast == false) {
                 taskID = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_ID))
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getInt(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 
-                taskList.add(Task(taskID, company, activity, date, time))
+
+                taskList.add(Task(taskID, company, activity))
                 cursor.moveToNext()
             }
         }
