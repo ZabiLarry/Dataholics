@@ -194,12 +194,12 @@ class MainActivity : AppCompatActivity() {
             R.id.family -> {
                 company = 4
 
-                Toast.makeText(this@MainActivity, time.toString() , Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, time.toString(), Toast.LENGTH_LONG).show()
             }
             R.id.coworkers -> {
                 company = 5
 
-                Toast.makeText(this@MainActivity, date , Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, date, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -214,14 +214,33 @@ class MainActivity : AppCompatActivity() {
         val dateAsArray = ArrayList<Int>()
         val dataAsChar = chooseDate.text.toString().toCharArray();
         //YYYY/MM/DD
-        for (i in 1..10){
-            if (i != 4 || i != 7){
+        for (i in 1..10) {
+            if (i != 4 || i != 7) {
                 dateAsArray.add(dataAsChar[i].toInt())
             }
         }
 
-        for (x in dateAsArray){
+        for (x in dateAsArray) {
             date = 10 * date + x
+        }
+
+        if (time >= 24) {
+            date++
+        }
+        if ((date % 100) > 28) {
+            if ((date % 10000) / 100 == 2) {
+                date += 100
+            }
+        }
+
+        if ((date % 100) > 30) {
+            if ((date % 10000) / 100 == 4 || (date % 10000) / 100 == 6 || (date % 10000) / 100 == 9 || (date % 10000) / 100 == 11) {
+                date += 100
+            }
+        }
+
+        if (date % 100 > 31){
+            date += 100
         }
 
         date = 100 * date + time
@@ -229,13 +248,15 @@ class MainActivity : AppCompatActivity() {
         val taskDBHelper = TaskDBHelper(this.applicationContext)
 
         if (activity == 0 || company == 0) {
-            Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG)
+                .show()
         } else {
             while (x < Integer.parseInt(durationTime.text.toString())) {
                 taskDBHelper.addTask(activity, company, date)
                 x++
             }
-            Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG)
+                .show()
         }
 
 
