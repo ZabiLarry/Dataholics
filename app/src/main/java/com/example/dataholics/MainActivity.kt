@@ -15,12 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.CalendarView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.dataholics.ui.data.ui.histogram.PiechartBottomFragment
 import com.example.dataholics.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_calender.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -89,6 +91,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(target, "Please select in which application you'd like to share: "))
 
     }
+    fun markDates(view: View){
+        var calendarView : CalendarView
+        calendarView = findViewById(R.id.calendarView)
+        calendarView.setDate(1584572400000)
+    }
+
 }
 
 private fun Any.replace(navHostFragmentContainer: Int, selectedFragment: Fragment) {
