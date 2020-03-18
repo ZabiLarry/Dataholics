@@ -21,15 +21,25 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.example.dataholics.database.DBContract
 import com.example.dataholics.database.Task
+import com.example.dataholics.database.TaskDBHelper
 import com.example.dataholics.ui.data.ui.histogram.PiechartBottomFragment
 import com.example.dataholics.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_create_account.view.*
+import kotlinx.android.synthetic.main.fragment_input.*
+import kotlinx.android.synthetic.main.fragment_input.view.*
+import kotlinx.android.synthetic.main.fragment_input.view.chooseDate
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    var activity = 0
+    var company = 0
+    var date = ""
+    var time = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +53,10 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val actionBarDrawerToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
-            R.string.navigation_drawer_open,R.string.navigation_drawer_close)
+        val actionBarDrawerToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -52,13 +64,15 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_profile, R.id.nav_data, R.id.nav_input, R.id.nav_settings,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_export), drawerLayout)
+            setOf(
+                R.id.nav_profile, R.id.nav_data, R.id.nav_input, R.id.nav_settings,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_export
+            ), drawerLayout
+        )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -74,14 +88,15 @@ class MainActivity : AppCompatActivity() {
 
 
     @Override
-    override fun onBackPressed(){
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-        }else{
+        } else {
             super.onBackPressed()
         }
     }
-    fun shareButton(view: View){
+
+    fun shareButton(view: View) {
 
         val message: String = "www.dataholics.yes/downloadlink"
 
@@ -91,33 +106,121 @@ class MainActivity : AppCompatActivity() {
         target.putExtra(Intent.EXTRA_TEXT, message)
         target.type = "text/plain"
 
-        startActivity(Intent.createChooser(target, "Please select in which application you'd like to share: "))
+        startActivity(
+            Intent.createChooser(
+                target,
+                "Please select in which application you'd like to share: "
+            )
+        )
 
     }
 
-    fun selectChoice(view:View){
-        when(view.id){
-            R.id.sleep -> Toast.makeText(this@MainActivity,  "Activity set to sleep", Toast.LENGTH_LONG).show()
-            R.id.eating -> Toast.makeText(this@MainActivity,  "Activity set to eating", Toast.LENGTH_LONG).show()
-            R.id.leisure -> Toast.makeText(this@MainActivity,  "Activity set to leisure", Toast.LENGTH_LONG).show()
-            R.id.school -> Toast.makeText(this@MainActivity,  "Activity set to school", Toast.LENGTH_LONG).show()
-            R.id.paid_job -> Toast.makeText(this@MainActivity,  "Activity set to paid job", Toast.LENGTH_LONG).show()
-            R.id.hmwork -> Toast.makeText(this@MainActivity,  "Activity set to homework", Toast.LENGTH_LONG).show()
-            R.id.errands -> Toast.makeText(this@MainActivity,  "Activity set to errands", Toast.LENGTH_LONG).show()
-            R.id.exercise -> Toast.makeText(this@MainActivity,  "Activity set to exercise", Toast.LENGTH_LONG).show()
-            R.id.travel -> Toast.makeText(this@MainActivity,  "Activity set to travel", Toast.LENGTH_LONG).show()
-            R.id.social -> Toast.makeText(this@MainActivity,  "Activity set to social", Toast.LENGTH_LONG).show()
-            R.id.health -> Toast.makeText(this@MainActivity,  "Activity set to health", Toast.LENGTH_LONG).show()
-            R.id.dating -> Toast.makeText(this@MainActivity,  "Activity set to dating", Toast.LENGTH_LONG).show()
-            R.id.alone -> Toast.makeText(this@MainActivity,  "Company set to alone", Toast.LENGTH_LONG).show()
-            R.id.partner -> Toast.makeText(this@MainActivity,  "Company set to partner", Toast.LENGTH_LONG).show()
-            R.id.friends -> Toast.makeText(this@MainActivity,  "Company set to friends", Toast.LENGTH_LONG).show()
-            R.id.family -> Toast.makeText(this@MainActivity,  "Company set to family", Toast.LENGTH_LONG).show()
-            R.id.coworkers -> Toast.makeText(this@MainActivity,  "Company set to coworkers", Toast.LENGTH_LONG).show()
+    fun selectChoice(view: View) {
+        when (view.id) {
+            R.id.sleep -> {
+                activity = 1
+                Toast.makeText(this@MainActivity, "Activity set to sleep", Toast.LENGTH_LONG).show()
+            }
+            R.id.eating -> {
+                activity = 2
+                Toast.makeText(this@MainActivity, "Activity set to eating", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.leisure -> {
+                activity = 3
+                Toast.makeText(this@MainActivity, "Activity set to leisure", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.school -> {
+                activity = 4
+                Toast.makeText(this@MainActivity, "Activity set to school", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.paid_job -> {
+                activity = 5
+                Toast.makeText(this@MainActivity, "Activity set to paid job", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.hmwork -> {
+                activity = 6
+                Toast.makeText(this@MainActivity, "Activity set to homework", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.errands -> {
+                activity = 7
+                Toast.makeText(this@MainActivity, "Activity set to errands", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.exercise -> {
+                activity = 8
+                Toast.makeText(this@MainActivity, "Activity set to exercise", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.travel -> {
+                activity = 9
+                Toast.makeText(this@MainActivity, "Activity set to travel", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.social -> {
+                activity = 10
+                Toast.makeText(this@MainActivity, "Activity set to social", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.health -> {
+                activity = 11
+                Toast.makeText(this@MainActivity, "Activity set to health", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.dating -> {
+                activity = 12
+                Toast.makeText(this@MainActivity, "Activity set to dating", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.alone -> {
+                company = 1
+                Toast.makeText(this@MainActivity, "Company set to alone", Toast.LENGTH_LONG).show()
+            }
+            R.id.partner -> {
+                company = 2
+                Toast.makeText(this@MainActivity, "Company set to partner", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.friends -> {
+                company = 3
+                Toast.makeText(this@MainActivity, "Company set to friends", Toast.LENGTH_LONG)
+                    .show()
+            }
+            R.id.family -> {
+                company = 4
+                time = chooseTimeStart.text.toString()
+                Toast.makeText(this@MainActivity, time.toString() , Toast.LENGTH_LONG).show()
+            }
+            R.id.coworkers -> {
+                company = 5
+                date = chooseDate.text.toString()
+                Toast.makeText(this@MainActivity, date , Toast.LENGTH_LONG).show()
+            }
         }
     }
 
 
+    fun addTask(view: View) {
+        var x = 0
+        val taskDBHelper = TaskDBHelper(this.applicationContext)
+        date = chooseDate.text.toString()
+        time = chooseTimeStart.text.toString()
+        if (activity == 0 || company == 0) {
+            Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
+        } else {
+            while (x < Integer.parseInt(durationTime.text.toString())) {
+                taskDBHelper.addTask(activity, company, date, time)
+                x++
+            }
+            Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()
+        }
+
+
+    }
 
 }
 
