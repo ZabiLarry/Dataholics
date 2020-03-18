@@ -4,14 +4,14 @@ import android.provider.BaseColumns;
 
 object DBContract {
 
-    class ActivityEntry : BaseColumns{
+    class TaskEntry : BaseColumns{
 
         companion object{
             val DATABASE_VERSION = 1;
             val DATABASE_NAME = "ActivitiesDatabase"
-            val TABLE_NAME = "activities"
-            val COLUMN_ACTIVITY_ID = "activityId"
-            val COLUMN_ACTIVITY_TYPE = "activityType"
+            val TABLE_NAME = "tasks"
+            val COLUMN_TASK_ID = "taskId"
+            val COLUMN_ACTIVITY = "activity"
             val COLUMN_COMPANY = "company"
             val COLUMN_DATE = "date"
             val COLUMN_TIME = "time"
