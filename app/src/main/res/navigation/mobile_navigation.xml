@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_data">
+    app:startDestination="@+id/nav_input">
+
+    <fragment
+        android:id="@+id/nav_input"
+        android:name="com.example.dataholics.ui.input.InputFragment"
+        android:label="Input"
+        tools:layout="@layout/fragment_input" />
 
     <fragment
         android:id="@+id/nav_data"
@@ -19,9 +25,9 @@
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.dataholics.ui.calendar.ToolsFragment"
+        android:name="com.example.dataholics.ui.calendar.CalenderFragment"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_calender" />
 
     <fragment
         android:id="@+id/nav_share"

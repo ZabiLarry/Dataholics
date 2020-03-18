@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
 
-class ToolsFragment : Fragment() {
+class CalenderFragment : Fragment() {
 
-    private lateinit var toolsViewModel: ToolsViewModel
+    private lateinit var calenderViewModel: CalenderViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ToolsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tools, container, false)
+        calenderViewModel =
+            ViewModelProviders.of(this).get(CalenderViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_calender, container, false)
         val textView: TextView = root.findViewById(R.id.text_tools)
-        toolsViewModel.text.observe(viewLifecycleOwner, Observer {
+        calenderViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
