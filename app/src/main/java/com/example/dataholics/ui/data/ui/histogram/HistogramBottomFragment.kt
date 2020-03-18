@@ -19,10 +19,9 @@ class HistogramBottomFragment : Fragment() {
     ): View? {
         histogramBottomViewModel = ViewModelProviders.of(this).get(HistogramBottomViewModel::class.java)
         val root = inflater.inflate(R.layout.bottom_fragment_histogram, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_histogram)
-        histogramBottomViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
+
+
         return root
     }
 }

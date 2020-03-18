@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.android.synthetic.main.fragment_input.view.*
 import kotlinx.android.synthetic.main.fragment_input.view.chooseDate
 import kotlinx.android.synthetic.main.nav_header_main.*
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     var activity = 0
     var company = 0
     var date = ""
-    var time = ""
+    var time = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -206,9 +207,14 @@ class MainActivity : AppCompatActivity() {
 
     fun addTask(view: View) {
         var x = 0
+        val timeCut = StringBuilder(2)
+        timeCut.append(chooseTimeStart.text.toString()[0])
+        timeCut.append(chooseTimeStart.text.toString()[1])
+        time = Integer.parseInt(timeCut.toString())
+
         val taskDBHelper = TaskDBHelper(this.applicationContext)
         date = chooseDate.text.toString()
-        time = chooseTimeStart.text.toString()
+
         if (activity == 0 || company == 0) {
             Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
         } else {

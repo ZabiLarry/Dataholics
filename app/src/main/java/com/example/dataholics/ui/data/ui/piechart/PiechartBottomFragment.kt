@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
+import com.github.mikephil.charting.charts.PieChart
+import kotlinx.android.synthetic.main.bottom_fragment_piechart.*
 
 class PiechartBottomFragment : Fragment() {
 
@@ -19,10 +21,12 @@ class PiechartBottomFragment : Fragment() {
     ): View? {
         piechartBottomViewModel = ViewModelProviders.of(this).get(PiechartBottomViewModel::class.java)
         val root = inflater.inflate(R.layout.bottom_fragment_piechart, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_histogram)
-        histogramBottomViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
+        val piechartActivity : PieChart = root.findViewById(R.id.piechartActivity)
+        piechartActivity.setUsePercentValues(true)
+
+
+
         return root
     }
 }

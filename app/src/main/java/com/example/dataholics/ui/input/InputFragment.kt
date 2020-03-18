@@ -23,14 +23,12 @@ class InputFragment : Fragment() {
 
     private lateinit var inputViewModel: InputViewModel
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        inputViewModel =
-            ViewModelProviders.of(this).get(InputViewModel::class.java)
+        inputViewModel = ViewModelProviders.of(this).get(InputViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_input, container, false)
 
         val cal =Calendar.getInstance()
