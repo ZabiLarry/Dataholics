@@ -10,7 +10,6 @@ import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN_ACTIVITY_TYPE
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN_COMPANY
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN_DATE
-import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN_MONEY
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.COLUMN_TIME
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.DATABASE_NAME
 import com.example.dataholics.database.DBContract.ActivityEntry.Companion.DATABASE_VERSION
@@ -20,8 +19,8 @@ class ActivityDBHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     private val CREATE_ACTIVITY_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
-            + COLUMN_ACTIVITY_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY_TYPE + " TEXT,"
-            + COLUMN_COMPANY  + " FLOAT," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "TEXT)")
+            + COLUMN_ACTIVITY_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY_TYPE + " INTEGER,"
+            + COLUMN_COMPANY  + " INTEGER," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "INTEGER)")
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -36,7 +35,7 @@ class ActivityDBHelper(context: Context) :
     }
 
 
-    fun addActivity(activityType: String, company: String, date: String, time: Int) {
+    fun addActivity(activityType: Int, company: Int, date: String, time: Int) {
         //Gets the repo to write mode
         val db = writableDatabase
 
@@ -74,15 +73,15 @@ class ActivityDBHelper(context: Context) :
             return activity
         }
 
-        var company: String
-        var activityType: String
+        var company: Int
+        var activityType: Int
         var date: String
         var time: Int
 
         if(cursor!!.moveToFirst()){
             while (!cursor.isAfterLast){
-                company = cursor.getString(cursor.getColumnIndex(COLUMN_COMPANY))
-                activityType = cursor.getString(cursor.getColumnIndex(COLUMN_ACTIVITY_TYPE))
+                company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
+                activityType = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY_TYPE))
                 date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
                 time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 
@@ -101,16 +100,16 @@ class ActivityDBHelper(context: Context) :
         val cursor: Cursor? = null
 
         var activityID: Int
-        var company: String
-        var activityType: String
+        var company: Int
+        var activityType: Int
         var date: String
         var time: Int
 
         if(cursor!!.moveToFirst()){
             while (cursor.isAfterLast == false){
                 activityID = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY_ID))
-                company = cursor.getString(cursor.getColumnIndex(COLUMN_COMPANY))
-                activityType = cursor.getString(cursor.getColumnIndex(COLUMN_ACTIVITY_TYPE))
+                company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
+                activityType = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY_TYPE))
                 date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
                 time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
 

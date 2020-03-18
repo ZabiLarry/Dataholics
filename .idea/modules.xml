@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Dataholics.iml" filepath="$PROJECT_DIR$/.idea/Dataholics.iml" group="Dataholics" />
-      <module fileurl="file://$PROJECT_DIR$/app/Dataholics-app.iml" filepath="$PROJECT_DIR$/app/Dataholics-app.iml" group="Dataholics/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Dataholics/app" />
     </modules>
   </component>

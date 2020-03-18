@@ -13,7 +13,6 @@ object DBContract {
             val COLUMN_ACTIVITY_ID = "activityId"
             val COLUMN_ACTIVITY_TYPE = "activityType"
             val COLUMN_COMPANY = "company"
-            val COLUMN_MONEY = "money"
             val COLUMN_DATE = "date"
             val COLUMN_TIME = "time"
         }
