@@ -26,7 +26,7 @@ class SettingsFragment : Fragment() {
             ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        val chooseTime:TextView = root.findViewById(R.id.chooseTimeNotification)
+        /*val chooseTime:TextView = root.findViewById(R.id.showTimeChosen)
         chooseTime.setOnClickListener{
             val cal =Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker: TimePicker, hour: Int, minute: Int ->
@@ -36,6 +36,8 @@ class SettingsFragment : Fragment() {
             }
             TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
+         */
         return root
     }
+
 }
