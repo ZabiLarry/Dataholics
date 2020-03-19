@@ -20,21 +20,22 @@ class TaskDBHelper(context: Context) :
 
     private val CREATE_TASK_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
             + COLUMN_TASK_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY + " INTEGER,"
-            + COLUMN_COMPANY  + " INTEGER," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "INTEGER)")
+            + COLUMN_COMPANY + " INTEGER," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "TEXT)")
 
 
     override fun onCreate(db: SQLiteDatabase?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         db?.execSQL(CREATE_TASK_TABLE)
     }
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
         onCreate(db)
     }
 
 
-    fun addTask(activity: Int, company: Int, date: String, time: Int) {
+    fun addTask(activity: Int, company: Int, date: String, time: String) {
         //Gets the repo to write mode
         val db = writableDatabase
 
@@ -48,7 +49,7 @@ class TaskDBHelper(context: Context) :
         //Inserting the new row
         try {
             val newRowId = db.insert(TABLE_NAME, null, values)
-        } catch (e:SQLiteException){
+        } catch (e: SQLiteException) {
             db.execSQL(CREATE_TASK_TABLE)
             val newRowId = db.insert(TABLE_NAME, null, values)
         }
@@ -60,14 +61,15 @@ class TaskDBHelper(context: Context) :
         return db.delete(TABLE_NAME, "activityId = ?", arrayOf(id))
     }
 
-    fun showTask(id: Int): ArrayList<Task>{
+    fun showTask(id: Int): ArrayList<Task> {
         val task = ArrayList<Task>()
         val db = this.readableDatabase
-        val selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + id + "'"
+        val selectQuery =
+            "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + id + "'"
         val cursor: Cursor
         try {
             cursor = db.rawQuery(selectQuery, null)
-        } catch (e: SQLiteException){
+        } catch (e: SQLiteException) {
             db.execSQL(CREATE_TASK_TABLE)
             return task
         }
@@ -75,14 +77,14 @@ class TaskDBHelper(context: Context) :
         var company: Int
         var activity: Int
         var date: String
-        var time: Int
+        var time: String
 
-        if(cursor!!.moveToFirst()){
-            while (!cursor.isAfterLast){
+        if (cursor!!.moveToFirst()) {
+            while (!cursor.isAfterLast) {
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
                 date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
+                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
 
                 task.add(Task(id, company, activity, date, time))
                 cursor.moveToNext()
@@ -102,15 +104,15 @@ class TaskDBHelper(context: Context) :
         var company: Int
         var activity: Int
         var date: String
-        var time: Int
+        var time: String
 
-        if(cursor!!.moveToFirst()){
-            while (cursor.isAfterLast == false){
+        if (cursor!!.moveToFirst()) {
+            while (cursor.isAfterLast == false) {
                 taskID = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_ID))
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
                 date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getInt(cursor.getColumnIndex(COLUMN_TIME))
+                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
 
                 taskList.add(Task(taskID, company, activity, date, time))
                 cursor.moveToNext()
@@ -119,4 +121,18 @@ class TaskDBHelper(context: Context) :
         return taskList
     }
 
+    fun getActivities(): ArrayList<Int> {
+        val db = this.writableDatabase
+        val res = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val activityList = ArrayList<Int>()
+        val cursor: Cursor? = null
+
+        if (cursor!!.moveToFirst()) {
+            while (cursor.isAfterLast == false) {
+                activityList.add(cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY)))
+                cursor.moveToNext()
+            }
+        }
+
+    return activityList}
 }

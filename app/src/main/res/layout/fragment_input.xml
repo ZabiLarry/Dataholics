@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
         android:backgroundTint="#FF0000"
-        android:onClick="selectChoice"
+        android:onClick="addTask"
         android:text="Add activity"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +77,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/duration"
         app:layout_constraintTop_toTopOf="@+id/chooseTimeStart"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintVertical_bias="0.476"
+        />
 
     <TextView
         android:id="@+id/start"
