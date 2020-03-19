@@ -35,7 +35,6 @@ class InputFragment : Fragment() {
 
         val chooseTimeFrom:TextView = root.findViewById(R.id.chooseTimeStart)
         val chooseDate:TextView = root.findViewById(R.id.chooseDate)
-        val context = this.context
 
         chooseTimeFrom.setOnClickListener{
 

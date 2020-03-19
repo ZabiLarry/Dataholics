@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
         val dateAsArray = ArrayList<Int>()
         val dataAsChar = chooseDate.text.toString().toCharArray();
         //YYYY/MM/DD
-        for (i in 1..10) {
+        for (i in 0..9) {
             if (i != 4 || i != 7) {
                 dateAsArray.add(dataAsChar[i].toInt())
             }
@@ -226,21 +226,30 @@ class MainActivity : AppCompatActivity() {
 
         if (time >= 24) {
             date++
+            time=0
         }
         if ((date % 100) > 28) {
             if ((date % 10000) / 100 == 2) {
                 date += 100
+                date-=27
             }
         }
 
         if ((date % 100) > 30) {
             if ((date % 10000) / 100 == 4 || (date % 10000) / 100 == 6 || (date % 10000) / 100 == 9 || (date % 10000) / 100 == 11) {
                 date += 100
+                date-=29
             }
         }
 
         if (date % 100 > 31){
             date += 100
+            date-=30
+        }
+
+        if ((date % 10000)/100 > 12){
+            date+=10000
+            date-=1100
         }
 
         date = 100 * date + time

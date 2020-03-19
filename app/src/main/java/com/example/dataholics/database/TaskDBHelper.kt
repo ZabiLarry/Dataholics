@@ -123,7 +123,7 @@ class TaskDBHelper(context: Context) :
         val cursor: Cursor? = null
 
         if (cursor!!.moveToFirst()) {
-            while (cursor.isAfterLast == false) {
+            while (!cursor.isAfterLast) {
                 activityList.add(cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY)))
                 cursor.moveToNext()
             }
