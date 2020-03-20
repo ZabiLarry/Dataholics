@@ -1,16 +1,22 @@
 package com.example.dataholics
 
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+import com.example.dataholics.Notification.AlertReceiver
+import com.example.dataholics.Notification.TimePickerFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -32,9 +38,18 @@ import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.android.synthetic.main.fragment_input.view.*
 import kotlinx.android.synthetic.main.fragment_input.view.chooseDate
 import kotlinx.android.synthetic.main.nav_header_main.*
+
 import java.lang.StringBuilder
 
-class MainActivity : AppCompatActivity() {
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+import java.text.DateFormat
+import java.util.*
+
+
+
+class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     var activity = 0
@@ -42,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     var date = 0
     var time = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,15 +81,55 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
+
             setOf(
                 R.id.nav_profile, R.id.nav_data, R.id.nav_input, R.id.nav_settings,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_export
             ), drawerLayout
         )
-
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+    // Notification----------------------------------------------------------------------------
+    fun setNotTime(view: View){
+        val timePicker : DialogFragment =
+            TimePickerFragment()
+        timePicker.show(supportFragmentManager, "time picker")
+    }
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        val showTime : TextView = findViewById(R.id.showTimeChosen)
+        showTime.text = ("Hour: " + hourOfDay + "Minute: " + minute)
+
+        val c = Calendar.getInstance()
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        c.set(Calendar.MINUTE, minute)
+        c.set(Calendar.SECOND, 0)
+
+        updateTimeText(c)
+        startNotification(c)
+    }
+    private fun updateTimeText(c:Calendar) {
+        var timeText : String = "Alarm set for: "
+        timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
+
+        showTimeChosen.text = timeText
+    }
+    private fun startNotification(c: Calendar) {
+        if(dailyReminder.isChecked) {
+            val alarmManager =
+                getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(this, AlertReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0)
+
+            if (c.before(Calendar.getInstance())) {
+                c.add(Calendar.DATE, 1)
+            }
+
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
+        }
+    }
+//--------------------------------------------------------------------------------------------------------
+
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
