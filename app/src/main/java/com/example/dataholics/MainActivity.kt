@@ -215,44 +215,13 @@ class MainActivity : AppCompatActivity() {
         val dataAsChar = chooseDate.text.toString().toCharArray();
         //YYYY/MM/DD
         for (i in 0..9) {
-            if (i != 4 || i != 7) {
-                dateAsArray.add(dataAsChar[i].toInt())
+            if (i != 4 && i != 7) {
+                dateAsArray.add(dataAsChar[i].toString().toInt())
             }
         }
-
         for (x in dateAsArray) {
             date = 10 * date + x
         }
-
-        if (time >= 24) {
-            date++
-            time=0
-        }
-        if ((date % 100) > 28) {
-            if ((date % 10000) / 100 == 2) {
-                date += 100
-                date-=27
-            }
-        }
-
-        if ((date % 100) > 30) {
-            if ((date % 10000) / 100 == 4 || (date % 10000) / 100 == 6 || (date % 10000) / 100 == 9 || (date % 10000) / 100 == 11) {
-                date += 100
-                date-=29
-            }
-        }
-
-        if (date % 100 > 31){
-            date += 100
-            date-=30
-        }
-
-        if ((date % 10000)/100 > 12){
-            date+=10000
-            date-=1100
-        }
-
-        date = 100 * date + time
 
         val taskDBHelper = TaskDBHelper(this.applicationContext)
 
@@ -261,7 +230,43 @@ class MainActivity : AppCompatActivity() {
                 .show()
         } else {
             while (x < Integer.parseInt(durationTime.text.toString())) {
+
+                if (time >= 24) {
+                    date++
+                    time = 0
+
+                    if ((date % 100) > 28) {
+                        if ((date % 10000) / 100 == 2) {
+                            date += 100
+                            date -= 27
+                        }
+                    }
+
+                    if ((date % 100) > 30) {
+                        if ((date % 10000) / 100 == 4 && (date % 10000) / 100 == 6 && (date % 10000) / 100 == 9
+                            && (date % 10000) / 100 == 11
+                        ) {
+                            date += 100
+                            date -= 29
+                        }
+                    }
+
+                    if (date % 100 > 31) {
+                        date += 100
+                        date -= 30
+                    }
+
+                    if ((date % 10000) / 100 > 12) {
+                        date += 10000
+                        date -= 1100
+                    }
+
+                }
+
+                date = 100 * date + time
+
                 taskDBHelper.addTask(activity, company, date)
+                time++
                 x++
             }
             Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG)
