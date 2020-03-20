@@ -42,7 +42,7 @@ class TaskDBHelper(context: Context) :
         values.put(COLUMN_COMPANY, company)
         values.put(COLUMN_ACTIVITY, activity)
         values.put(COLUMN_TASK_ID, date)
-
+        //Checks if is already
         if (checkAlreadyExist(date)){
             db.update(TABLE_NAME, values, "taskId= " + date, null)
         } else {
