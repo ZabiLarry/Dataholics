@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002">
+
+        <Button
+            android:id="@+id/sleep"
+            android:layout_width="130dp"
+            android:backgroundTint="#00A8F4"
+            android:onClick="selectChoice"
+            android:text="sleep"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/eating"
+            android:layout_width="130dp"
+            android:backgroundTint="#348137"
+            android:onClick="selectChoice"
+            android:text="eating"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/leisure"
+            android:layout_width="130dp"
+            android:backgroundTint="#FF5722"
+            android:onClick="selectChoice"
+            android:text="leisure"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/school"
+            android:layout_width="130dp"
+            android:backgroundTint="#6A10D3"
+            android:onClick="selectChoice"
+            android:text="school"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/paid_job"
+            android:layout_width="130dp"
+            android:backgroundTint="#07BA96"
+            android:onClick="selectChoice"
+            android:text="paid job"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/hmwork"
+            android:layout_width="130dp"
+            android:backgroundTint="#FFC107"
+            android:onClick="selectChoice"
+            android:text="hmwork"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/errands"
+            android:layout_width="130dp"
+            android:backgroundTint="#E91E63"
+            android:onClick="selectChoice"
+            android:text="errands"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/exercise"
+            android:layout_width="130dp"
+            android:backgroundTint="#1F37BC"
+            android:onClick="selectChoice"
+            android:text="exercise"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/travel"
+            android:layout_width="130dp"
+            android:backgroundTint="#CDDC39"
+            android:onClick="selectChoice"
+            android:text="travel"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/social"
+            android:layout_width="130dp"
+            android:backgroundTint="#8BC34A"
+            android:onClick="selectChoice"
+            android:text="social"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/health"
+            android:layout_width="130dp"
+            android:backgroundTint="#9C27B0"
+            android:onClick="selectChoice"
+            android:text="health"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/dating"
+            android:layout_width="130dp"
+            android:backgroundTint="#06D0EA"
+            android:onClick="selectChoice"
+            android:text="dating"
+            android:textSize="23dp" />
+
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
