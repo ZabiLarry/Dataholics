@@ -275,6 +275,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                 dateAsArray.add(dataAsChar[i].toString().toInt())
             }
         }
+        var date : Int = 0
 
         for (j in dateAsArray) {
             date = 10 * date + j
