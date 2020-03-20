@@ -89,13 +89,17 @@ class TaskDBHelper(context: Context) :
         return task
     }
 
-    fun checkAlreadyExist(task: Int): Boolean {
+    fun checkAlreadyExist(taskId: Int): Boolean {
         val db = this.readableDatabase
         val query: String =
-            "SELECT " + COLUMN_TASK_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " =?"
+            "SELECT " + COLUMN_TASK_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + taskId + "'"
         val cursor: Cursor
-                cursor = db.rawQuery(query, null)
-        return cursor.count <= 0
+        cursor = db.rawQuery(query, null)
+        if (cursor.count <= 0){
+            return false
+        } else {
+            return true
+        }
     }
 
     fun allTasks(): ArrayList<Task> {
