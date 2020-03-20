@@ -275,8 +275,9 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                 dateAsArray.add(dataAsChar[i].toString().toInt())
             }
         }
-        for (x in dateAsArray) {
-            date = 10 * date + x
+
+        for (j in dateAsArray) {
+            date = 10 * date + j
         }
 
         val taskDBHelper = TaskDBHelper(this.applicationContext)
@@ -294,7 +295,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                     if ((date % 100) > 28) {
                         if ((date % 10000) / 100 == 2) {
                             date += 100
-                            date -= 27
+                            date -= 28
                         }
                     }
 
@@ -303,25 +304,23 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                             && (date % 10000) / 100 == 11
                         ) {
                             date += 100
-                            date -= 29
+                            date -= 30
                         }
                     }
 
                     if (date % 100 > 31) {
                         date += 100
-                        date -= 30
+                        date -= 31
                     }
 
                     if ((date % 10000) / 100 > 12) {
                         date += 10000
-                        date -= 1100
+                        date -= 1200
                     }
 
                 }
 
-                date = 100 * date + time
-
-                taskDBHelper.addTask(activity, company, date)
+                taskDBHelper.addTask(activity, company, 100 * date + time)
                 time++
                 x++
             }
