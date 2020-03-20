@@ -8,13 +8,11 @@ object DBContract {
 
         companion object{
             val DATABASE_VERSION = 1;
-            val DATABASE_NAME = "ActivitiesDatabase"
+            val DATABASE_NAME = "TasksDatabase.db"
             val TABLE_NAME = "tasks"
             val COLUMN_TASK_ID = "taskId"
             val COLUMN_ACTIVITY = "activity"
             val COLUMN_COMPANY = "company"
-            val COLUMN_DATE = "date"
-            val COLUMN_TIME = "time"
         }
     }
 }
