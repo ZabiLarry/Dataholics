@@ -249,13 +249,13 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
             }
             R.id.family -> {
                 company = 4
-
-                Toast.makeText(this@MainActivity, time.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Company set to family", Toast.LENGTH_LONG)
+                    .show()
             }
             R.id.coworkers -> {
                 company = 5
-
-                Toast.makeText(this@MainActivity, date, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Company set to co-workers", Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
