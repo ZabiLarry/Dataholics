@@ -41,9 +41,10 @@ class PiechartBottomFragment : Fragment() {
         val dbHelper = TaskDBHelper(context!!)
         val activityValue = arrayOf(0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f)
         val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework","Errands","Exercise","Travel","Social","Health","Dating")
+        val activityList : ArrayList<Int> = ArrayList(dbHelper.getActivities())
 
-        for (i in 0..dbHelper.allTasks().size){
-            when (dbHelper.getActivities()[i]){
+        for (i  in 0 until activityList.size){
+            when (activityList[i]){
                 1 -> activityValue[0] = activityValue[0] + 1
                 2 -> activityValue[1] = activityValue[1] + 1
                 3 -> activityValue[2] = activityValue[2] + 1
