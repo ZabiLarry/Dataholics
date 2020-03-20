@@ -43,9 +43,13 @@ class TaskDBHelper(context: Context) :
         values.put(COLUMN_ACTIVITY, activity)
         values.put(COLUMN_TASK_ID, date)
 
+        if (checkAlreadyExist(date)){
+            db.update(TABLE_NAME, values, "taskId= " + date, null)
+        } else {
+            db.insert(TABLE_NAME, null, values)
+        }
 
         //Inserting the new row
-        db.insert(TABLE_NAME, null, values)
         db.close()
 
 
@@ -83,6 +87,15 @@ class TaskDBHelper(context: Context) :
         }
         db.close()
         return task
+    }
+
+    fun checkAlreadyExist(task: Int): Boolean {
+        val db = this.readableDatabase
+        val query: String =
+            "SELECT " + COLUMN_TASK_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " =?"
+        val cursor: Cursor
+                cursor = db.rawQuery(query, null)
+        return cursor.count <= 0
     }
 
     fun allTasks(): ArrayList<Task> {
