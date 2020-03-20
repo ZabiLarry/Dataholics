@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
@@ -15,6 +16,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.android.synthetic.main.bottom_fragment_piechart.*
 
 class PiechartBottomFragment : Fragment() {
 
@@ -27,22 +29,22 @@ class PiechartBottomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         piechartBottomViewModel = ViewModelProviders.of(this).get(PiechartBottomViewModel::class.java)
-
         root = inflater.inflate(R.layout.bottom_fragment_piechart, container, false)
-
-        createPieChart()
+        val buttonRefresh : Button = root!!.findViewById(R.id.refreshButton)
+        val piechartActivity : PieChart = root!!.findViewById(R.id.piechartActivity)
+        piechartActivity.isRotationEnabled=true
+        refresh(piechartActivity)
+        buttonRefresh.setOnClickListener{
+            refresh(piechartActivity)
+        }
         return root
     }
 
-    private fun createPieChart() {
-        val piechartActivity : PieChart = root!!.findViewById(R.id.piechartActivity)
-        piechartActivity.isRotationEnabled=true
-
+    private fun refresh(piechartActivity: PieChart){
         val dbHelper = TaskDBHelper(context!!)
         val activityValue = arrayOf(0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f)
         val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework","Errands","Exercise","Travel","Social","Health","Dating")
         val activityList : ArrayList<Int> = ArrayList(dbHelper.getActivities())
-
         for (i  in 0 until activityList.size){
             when (activityList[i]){
                 1 -> activityValue[0] = activityValue[0] + 1
@@ -96,7 +98,7 @@ class PiechartBottomFragment : Fragment() {
 
         piechartActivity.invalidate()
 
-
     }
+
 }
 

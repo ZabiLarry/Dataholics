@@ -74,7 +74,7 @@ class TaskDBHelper(context: Context) :
         var activity: Int
 
 
-        if (cursor!!.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
@@ -95,11 +95,7 @@ class TaskDBHelper(context: Context) :
             "SELECT " + COLUMN_TASK_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + taskId + "'"
         val cursor: Cursor
         cursor = db.rawQuery(query, null)
-        if (cursor.count <= 0){
-            return false
-        } else {
-            return true
-        }
+        return cursor.count > 0
     }
 
     fun allTasks(): ArrayList<Task> {

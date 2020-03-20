@@ -29,10 +29,10 @@ class DataFragment : Fragment() {
     ): View? {
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_data, container, false)
-        val transaction = fragmentManager!!.beginTransaction()
+
         var selectedFragment: Fragment = PiechartBottomFragment()
-        transaction.replace(R.id.bottom_fragment_container, selectedFragment)
-        transaction.commit()
+        fragmentManager!!.beginTransaction().replace(R.id.bottom_fragment_container, selectedFragment).commit()
+
 
         val bottonNav : BottomNavigationView = root.findViewById(R.id.bottom_navigation)
         bottonNav.setOnNavigationItemSelectedListener{
@@ -44,10 +44,12 @@ class DataFragment : Fragment() {
                 R.id.nav_table -> selectedFragment = TableBottomFragment()
             }
 
-            transaction.replace(R.id.bottom_fragment_container, selectedFragment)
-            transaction.commit()
+            fragmentManager!!.beginTransaction().replace(R.id.bottom_fragment_container, selectedFragment).commit()
+
+
             return@setOnNavigationItemSelectedListener true
         }
+
 
         return root
     }
