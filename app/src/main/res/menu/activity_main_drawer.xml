@@ -10,10 +10,7 @@
             android:id="@+id/nav_data"
             android:icon="@drawable/ic_equalizer_black_24dp"
             android:title="Data" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_person_black_24dp"
-            android:title="Profile" />
+
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_today_black_24dp"

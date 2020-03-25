@@ -5,17 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -45,6 +38,9 @@ import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.android.synthetic.main.fragment_input.view.*
 import kotlinx.android.synthetic.main.fragment_input.view.chooseDate
 import kotlinx.android.synthetic.main.nav_header_main.*
+
+import java.lang.StringBuilder
+
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -52,13 +48,14 @@ import java.text.DateFormat
 import java.util.*
 
 
+
 class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     var activity = 0
     var company = 0
-    var date = ""
-    var time = ""
+    var date = 0
+    var time = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,9 +65,8 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            super.onBackPressed()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val actionBarDrawerToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
@@ -252,31 +248,85 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
             }
             R.id.family -> {
                 company = 4
-                time = chooseTimeStart.text.toString()
-                Toast.makeText(this@MainActivity, time.toString() , Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Company set to family", Toast.LENGTH_LONG)
+                    .show()
             }
             R.id.coworkers -> {
                 company = 5
-                date = chooseDate.text.toString()
-                Toast.makeText(this@MainActivity, date , Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Company set to co-workers", Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
 
 
     fun addTask(view: View) {
+        val chooseTimeStart = findViewById<TextView>(R.id.chooseTimeStart)
+        val chooseDate = findViewById<TextView>(R.id.chooseDate)
         var x = 0
+        val timeCut = StringBuilder(2)
+        timeCut.append(chooseTimeStart.text.toString()[0])
+        timeCut.append(chooseTimeStart.text.toString()[1])
+        time = Integer.parseInt(timeCut.toString())
+        val dateAsArray = ArrayList<Int>()
+        val dataAsChar = chooseDate.text.toString().toCharArray();
+        //YYYY/MM/DD
+        for (i in 0..9) {
+            if (i != 4 && i != 7) {
+                dateAsArray.add(dataAsChar[i].toString().toInt())
+            }
+        }
+
+        for (j in dateAsArray) {
+            date = 10 * date + j
+        }
+
         val taskDBHelper = TaskDBHelper(this.applicationContext)
-        date = chooseDate.text.toString()
-        time = chooseTimeStart.text.toString()
+
         if (activity == 0 || company == 0) {
-            Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity, "Activity or company not selected", Toast.LENGTH_LONG)
+                .show()
         } else {
             while (x < Integer.parseInt(durationTime.text.toString())) {
-                taskDBHelper.addTask(activity, company, date, time)
+
+                if (time >= 24) {
+                    date++
+                    time = 0
+
+                    if ((date % 100) > 28) {
+                        if ((date % 10000) / 100 == 2) {
+                            date += 100
+                            date -= 28
+                        }
+                    }
+
+                    if ((date % 100) > 30) {
+                        if ((date % 10000) / 100 == 4 && (date % 10000) / 100 == 6 && (date % 10000) / 100 == 9
+                            && (date % 10000) / 100 == 11
+                        ) {
+                            date += 100
+                            date -= 30
+                        }
+                    }
+
+                    if (date % 100 > 31) {
+                        date += 100
+                        date -= 31
+                    }
+
+                    if ((date % 10000) / 100 > 12) {
+                        date += 10000
+                        date -= 1200
+                    }
+
+                }
+
+                taskDBHelper.addTask(activity, company, 100 * date + time)
+                time++
                 x++
             }
-            Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG)
+                .show()
         }
 
 

@@ -30,20 +30,26 @@ class DataFragment : Fragment() {
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_data, container, false)
 
+        var selectedFragment: Fragment = PiechartBottomFragment()
+        fragmentManager!!.beginTransaction().replace(R.id.bottom_fragment_container, selectedFragment).commit()
+
+
         val bottonNav : BottomNavigationView = root.findViewById(R.id.bottom_navigation)
         bottonNav.setOnNavigationItemSelectedListener{
-            var selectedFragment: Fragment = PiechartBottomFragment()
+
             when (it.itemId) {
                 R.id.nav_piechart -> selectedFragment = PiechartBottomFragment()
                 R.id.nav_histogram -> selectedFragment = HistogramBottomFragment()
                 R.id.nav_trends -> selectedFragment = TrendsBottomFragment()
-                R.id.nav_table -> selectedFragment = TableBottomFragment()
+
             }
-            val transaction = fragmentManager!!.beginTransaction()
-            transaction.replace(R.id.bottom_fragment_container, selectedFragment)
-            transaction.commit()
+
+            fragmentManager!!.beginTransaction().replace(R.id.bottom_fragment_container, selectedFragment).commit()
+
+
             return@setOnNavigationItemSelectedListener true
         }
+
 
         return root
     }

@@ -6,11 +6,9 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_TASK_ID
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_ACTIVITY
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_COMPANY
-import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_DATE
-import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_TIME
+import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_TASK_ID
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.DATABASE_NAME
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.DATABASE_VERSION
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.TABLE_NAME
@@ -19,8 +17,8 @@ class TaskDBHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     private val CREATE_TASK_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
-            + COLUMN_TASK_ID + " INTEGER PRIMARY KEY," + COLUMN_ACTIVITY + " INTEGER,"
-            + COLUMN_COMPANY + " INTEGER," + COLUMN_DATE + " TEXT," + COLUMN_TIME + "TEXT)")
+            + COLUMN_TASK_ID + " BLOB PRIMARY KEY, " +
+            "" + COLUMN_COMPANY + " INTEGER, " + COLUMN_ACTIVITY + " INTEGER" + ")")
 
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -35,24 +33,27 @@ class TaskDBHelper(context: Context) :
     }
 
 
-    fun addTask(activity: Int, company: Int, date: String, time: String) {
+    fun addTask(activity: Int, company: Int, date: Int) {
         //Gets the repo to write mode
         val db = writableDatabase
 
         //Mapping all the values to go in
         val values = ContentValues()
-        values.put(COLUMN_ACTIVITY, activity)
-        values.put(COLUMN_COMPANY, company)
-        values.put(COLUMN_DATE, date)
-        values.put(COLUMN_TIME, time)
 
-        //Inserting the new row
+        values.put(COLUMN_COMPANY, company)
+        values.put(COLUMN_ACTIVITY, activity)
+        values.put(COLUMN_TASK_ID, date)
+        //tries to insert
         try {
-            val newRowId = db.insert(TABLE_NAME, null, values)
-        } catch (e: SQLiteException) {
-            db.execSQL(CREATE_TASK_TABLE)
-            val newRowId = db.insert(TABLE_NAME, null, values)
+            db.insertOrThrow(TABLE_NAME, null, values)
+        } catch (e: SQLiteException){
+
         }
+        //always updates even if insert fails
+        db.update(TABLE_NAME, values, "taskId = " + date, null)
+
+        db.close()
+
 
     }
 
@@ -66,73 +67,93 @@ class TaskDBHelper(context: Context) :
         val db = this.readableDatabase
         val selectQuery =
             "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + id + "'"
-        val cursor: Cursor
-        try {
-            cursor = db.rawQuery(selectQuery, null)
-        } catch (e: SQLiteException) {
-            db.execSQL(CREATE_TASK_TABLE)
-            return task
-        }
+        var cursor: Cursor
+
+        cursor = db.rawQuery(selectQuery, null)
+
 
         var company: Int
         var activity: Int
-        var date: String
-        var time: String
 
-        if (cursor!!.moveToFirst()) {
+
+        if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast) {
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
 
-                task.add(Task(id, company, activity, date, time))
+
+                task.add(Task(id, company, activity))
                 cursor.moveToNext()
 
             }
         }
+        cursor.close()
+        db.close()
         return task
     }
 
+
     fun allTasks(): ArrayList<Task> {
-        val db = this.writableDatabase
-        val res = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+
+        cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+
         val taskList = ArrayList<Task>()
-        val cursor: Cursor? = null
 
         var taskID: Int
         var company: Int
         var activity: Int
-        var date: String
-        var time: String
 
-        if (cursor!!.moveToFirst()) {
-            while (cursor.isAfterLast == false) {
+        if (cursor.moveToFirst()) {
+            do {
                 taskID = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_ID))
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
-                date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
-                time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
 
-                taskList.add(Task(taskID, company, activity, date, time))
+
+                taskList.add(Task(taskID, company, activity))
                 cursor.moveToNext()
-            }
+            } while (cursor.moveToNext())
         }
+        cursor.close()
+        db.close()
         return taskList
     }
 
     fun getActivities(): ArrayList<Int> {
-        val db = this.writableDatabase
-        val res = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
         val activityList = ArrayList<Int>()
-        val cursor: Cursor? = null
 
-        if (cursor!!.moveToFirst()) {
-            while (cursor.isAfterLast == false) {
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
                 activityList.add(cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY)))
                 cursor.moveToNext()
             }
         }
+        cursor.close()
+        db.close()
+        return activityList
+    }
 
-    return activityList}
+    fun getCompanies(): ArrayList<Int> {
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val companyList = ArrayList<Int>()
+
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                companyList.add(cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY)))
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        db.close()
+        return companyList
+    }
 }
