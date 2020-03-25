@@ -65,9 +65,8 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            super.onBackPressed()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val actionBarDrawerToggle: ActionBarDrawerToggle = ActionBarDrawerToggle(
