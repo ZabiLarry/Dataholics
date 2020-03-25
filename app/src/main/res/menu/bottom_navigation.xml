@@ -16,9 +16,5 @@
         android:icon="@drawable/ic_trending_up_black_24dp"
         android:title="Trends"
         />
-    <item
-        android:id="@+id/nav_table"
-        android:icon="@drawable/ic_view_comfy_black_24dp"
-        android:title="Table"
-        />
+  
 </menu>

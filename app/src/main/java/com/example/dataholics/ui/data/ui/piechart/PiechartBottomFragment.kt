@@ -32,10 +32,10 @@ class PiechartBottomFragment : Fragment() {
     ): View? {
         piechartBottomViewModel = ViewModelProviders.of(this).get(PiechartBottomViewModel::class.java)
         root = inflater.inflate(R.layout.bottom_fragment_piechart, container, false)
-        val buttonRefresh : Button = root!!.findViewById(R.id.refreshButton)
+
         piechartActivity = root!!.findViewById(R.id.piechartActivity)
         piechartActivity.isRotationEnabled=true
-
+        val buttonRefresh : Button = root!!.findViewById(R.id.refreshButton)
         refresh()
         buttonRefresh.setOnClickListener{
             refresh()
