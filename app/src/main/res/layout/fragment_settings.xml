@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:onClick="setNotification"
         android:text="Notification Settings"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -71,6 +72,7 @@
         android:id="@+id/dailyReminder"
         android:layout_width="249dp"
         android:layout_height="37dp"
+        android:checked="false"
         android:text="Daily Reminder"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,22 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_settings2"
         app:layout_constraintVertical_bias="0.053" />
-
-    <TextView
-        android:id="@+id/chooseTimeNotification"
-        android:layout_width="81dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="588dp"
-        android:ems="10"
-        android:text="00:00"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyReminder"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Switch
         android:id="@+id/switch1"
@@ -108,5 +94,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_settings"
         app:layout_constraintVertical_bias="0.078" />
+
+    <Button
+        android:id="@+id/chooseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setNotTime"
+        android:text="Choose Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyReminder" />
+
+    <TextView
+        android:id="@+id/showTimeChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="38dp"
+        android:text="00:00"
+        app:layout_constraintBottom_toTopOf="@+id/wua"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintStart_toEndOf="@+id/chooseTime"
+        app:layout_constraintTop_toBottomOf="@+id/dailyReminder"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
