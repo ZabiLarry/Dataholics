@@ -87,6 +87,7 @@ class TaskDBHelper(context: Context) :
 
             }
         }
+        cursor.close()
         db.close()
         return task
     }
@@ -116,6 +117,7 @@ class TaskDBHelper(context: Context) :
                 cursor.moveToNext()
             } while (cursor.moveToNext())
         }
+        cursor.close()
         db.close()
         return taskList
     }
@@ -133,6 +135,7 @@ class TaskDBHelper(context: Context) :
                 cursor.moveToNext()
             }
         }
+        cursor.close()
         db.close()
         return activityList
     }
