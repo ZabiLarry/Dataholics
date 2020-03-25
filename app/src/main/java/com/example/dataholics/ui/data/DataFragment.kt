@@ -41,7 +41,7 @@ class DataFragment : Fragment() {
                 R.id.nav_piechart -> selectedFragment = PiechartBottomFragment()
                 R.id.nav_histogram -> selectedFragment = HistogramBottomFragment()
                 R.id.nav_trends -> selectedFragment = TrendsBottomFragment()
-                R.id.nav_table -> selectedFragment = TableBottomFragment()
+
             }
 
             fragmentManager!!.beginTransaction().replace(R.id.bottom_fragment_container, selectedFragment).commit()

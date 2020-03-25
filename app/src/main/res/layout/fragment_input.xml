@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030">
+    android:background="#282828">
 
 
     <Button
@@ -77,8 +77,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/duration"
         app:layout_constraintTop_toTopOf="@+id/chooseTimeStart"
-        app:layout_constraintVertical_bias="0.476"
-        />
+        app:layout_constraintVertical_bias="0.476" />
 
     <TextView
         android:id="@+id/start"
@@ -159,96 +158,96 @@
         <Button
             android:id="@+id/sleep"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#00A8F4"
+            android:onClick="selectChoice"
             android:text="sleep"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/eating"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#348137"
+            android:onClick="selectChoice"
             android:text="eating"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/leisure"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#FF5722"
+            android:onClick="selectChoice"
             android:text="leisure"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/school"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#6A10D3"
+            android:onClick="selectChoice"
             android:text="school"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/paid_job"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#07BA96"
+            android:onClick="selectChoice"
             android:text="paid job"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/hmwork"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#FFC107"
+            android:onClick="selectChoice"
             android:text="hmwork"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/errands"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#E91E63"
+            android:onClick="selectChoice"
             android:text="errands"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/exercise"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#1F37BC"
+            android:onClick="selectChoice"
             android:text="exercise"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/travel"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#CDDC39"
+            android:onClick="selectChoice"
             android:text="travel"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/social"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#8BC34A"
+            android:onClick="selectChoice"
             android:text="social"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/health"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#9C27B0"
+            android:onClick="selectChoice"
             android:text="health"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/dating"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#06D0EA"
+            android:onClick="selectChoice"
             android:text="dating"
             android:textSize="23dp" />
 
@@ -288,43 +287,43 @@
         <Button
             android:id="@+id/alone"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#FFFFFF"
+            android:onClick="selectChoice"
             android:text="alone"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/partner"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#D3D3D3"
+            android:onClick="selectChoice"
             android:text="partner"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/friends"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:backgroundTint="#AAAAAA"
+            android:onClick="selectChoice"
             android:text="friends"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/family"
             android:layout_width="130dp"
-            android:onClick="selectChoice"
             android:layout_row="1"
             android:layout_column="0"
-            android:backgroundTint="#515151"
+            android:backgroundTint="#7D7D7D"
+            android:onClick="selectChoice"
             android:text="family"
             android:textSize="23dp" />
 
         <Button
             android:id="@+id/coworkers"
             android:layout_width="260dp"
-            android:onClick="selectChoice"
             android:layout_columnSpan="2"
-            android:backgroundTint="#808080"
+            android:backgroundTint="#454545"
+            android:onClick="selectChoice"
             android:text="co-workers"
             android:textSize="23dp" />
 

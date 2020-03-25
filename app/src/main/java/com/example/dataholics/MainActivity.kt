@@ -261,8 +261,8 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
 
     fun addTask(view: View) {
-        //val chooseTimeStart = TextView(findViewById(R.id.chooseTimeStart))
-        //val chooseDate = TextView(findViewById(R.id.chooseDate))
+        val chooseTimeStart = findViewById<TextView>(R.id.chooseTimeStart)
+        val chooseDate = findViewById<TextView>(R.id.chooseDate)
         var x = 0
         val timeCut = StringBuilder(2)
         timeCut.append(chooseTimeStart.text.toString()[0])

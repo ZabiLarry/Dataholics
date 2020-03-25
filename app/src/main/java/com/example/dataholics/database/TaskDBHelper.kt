@@ -138,4 +138,22 @@ class TaskDBHelper(context: Context) :
         db.close()
         return activityList
     }
+
+    fun getCompanies(): ArrayList<Int> {
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        val companyList = ArrayList<Int>()
+
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                companyList.add(cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY)))
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        db.close()
+        return companyList
+    }
 }
