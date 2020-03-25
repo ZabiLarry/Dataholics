@@ -11,6 +11,7 @@ import com.example.dataholics.R
 class HistogramBottomFragment : Fragment() {
 
     private lateinit var histogramBottomViewModel: HistogramBottomViewModel
+    var root: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,9 +19,7 @@ class HistogramBottomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         histogramBottomViewModel = ViewModelProviders.of(this).get(HistogramBottomViewModel::class.java)
-        val root = inflater.inflate(R.layout.bottom_fragment_histogram, container, false)
-
-
+        root = inflater.inflate(R.layout.bottom_fragment_histogram, container, false)
 
         return root
     }

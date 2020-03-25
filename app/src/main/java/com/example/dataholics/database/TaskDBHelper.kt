@@ -106,7 +106,6 @@ class TaskDBHelper(context: Context) :
 
         val taskList = ArrayList<Task>()
 
-
         var taskID: Int
         var company: Int
         var activity: Int

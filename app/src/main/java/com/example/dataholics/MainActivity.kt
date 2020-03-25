@@ -263,12 +263,12 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
     fun addTask(view: View) {
         var x = 0
-        val timeCut = StringBuilder(2)
+        var timeCut = StringBuilder(2)
         timeCut.append(chooseTimeStart.text.toString()[0])
         timeCut.append(chooseTimeStart.text.toString()[1])
         time = Integer.parseInt(timeCut.toString())
-        val dateAsArray = ArrayList<Int>()
-        val dataAsChar = chooseDate.text.toString().toCharArray();
+        var dateAsArray = ArrayList<Int>()
+        var dataAsChar = chooseDate.text.toString().toCharArray();
         //YYYY/MM/DD
         for (i in 0..9) {
             if (i != 4 && i != 7) {

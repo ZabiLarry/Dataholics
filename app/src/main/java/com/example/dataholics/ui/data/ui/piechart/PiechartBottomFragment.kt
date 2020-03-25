@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
@@ -22,6 +23,7 @@ class PiechartBottomFragment : Fragment() {
 
     private lateinit var piechartBottomViewModel: PiechartBottomViewModel
     var root : View? = null
+    private lateinit var piechartActivity : PieChart
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,16 +33,18 @@ class PiechartBottomFragment : Fragment() {
         piechartBottomViewModel = ViewModelProviders.of(this).get(PiechartBottomViewModel::class.java)
         root = inflater.inflate(R.layout.bottom_fragment_piechart, container, false)
         val buttonRefresh : Button = root!!.findViewById(R.id.refreshButton)
-        val piechartActivity : PieChart = root!!.findViewById(R.id.piechartActivity)
+        piechartActivity = root!!.findViewById(R.id.piechartActivity)
         piechartActivity.isRotationEnabled=true
-        refresh(piechartActivity)
+
+        refresh()
         buttonRefresh.setOnClickListener{
-            refresh(piechartActivity)
+            refresh()
+            Toast.makeText(context, "Refreshed", Toast.LENGTH_LONG).show()
         }
         return root
     }
 
-    private fun refresh(piechartActivity: PieChart){
+    private fun refresh(){
         val dbHelper = TaskDBHelper(context!!)
         val activityValue = arrayOf(0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f)
         val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework","Errands","Exercise","Travel","Social","Health","Dating")
@@ -95,8 +99,9 @@ class PiechartBottomFragment : Fragment() {
         val data = PieData(pieDataSet)
 
         piechartActivity.data=data
-
+        piechartActivity.notifyDataSetChanged()
         piechartActivity.invalidate()
+
 
     }
 
