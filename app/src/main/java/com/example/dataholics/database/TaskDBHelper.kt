@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_ACTIVITY
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_COMPANY
@@ -42,14 +43,15 @@ class TaskDBHelper(context: Context) :
         values.put(COLUMN_COMPANY, company)
         values.put(COLUMN_ACTIVITY, activity)
         values.put(COLUMN_TASK_ID, date)
-        //Checks if is already
-        if (checkAlreadyExist(date)){
-            db.update(TABLE_NAME, values, "taskId= " + date, null)
-        } else {
-            db.insert(TABLE_NAME, null, values)
-        }
+        //tries to insert
+        try {
+            db.insertOrThrow(TABLE_NAME, null, values)
+        } catch (e: SQLiteException){
 
-        //Inserting the new row
+        }
+        //always updates even if insert fails
+        db.update(TABLE_NAME, values, "taskId = " + date, null)
+
         db.close()
 
 
@@ -85,22 +87,15 @@ class TaskDBHelper(context: Context) :
 
             }
         }
+        cursor.close()
         db.close()
         return task
     }
 
-    fun checkAlreadyExist(taskId: Int): Boolean {
-        val db = this.readableDatabase
-        val query: String =
-            "SELECT " + COLUMN_TASK_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_TASK_ID + " = '" + taskId + "'"
-        val cursor: Cursor
-        cursor = db.rawQuery(query, null)
-        return cursor.count > 0
-    }
 
     fun allTasks(): ArrayList<Task> {
         val db = this.readableDatabase
-        var cursor: Cursor
+        var cursor: Cursor? = null
 
         cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
 
@@ -121,6 +116,7 @@ class TaskDBHelper(context: Context) :
                 cursor.moveToNext()
             } while (cursor.moveToNext())
         }
+        cursor.close()
         db.close()
         return taskList
     }
@@ -138,6 +134,7 @@ class TaskDBHelper(context: Context) :
                 cursor.moveToNext()
             }
         }
+        cursor.close()
         db.close()
         return activityList
     }
