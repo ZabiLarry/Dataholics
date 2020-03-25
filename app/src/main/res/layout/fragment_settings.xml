@@ -7,23 +7,6 @@
 
 
     <TextView
-        android:id="@+id/text_settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="360dp"
-        android:text="Input Settings"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/o24r"
-        app:layout_constraintVertical_bias="0.911" />
-
-    <TextView
         android:id="@+id/text_settings2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,36 +24,8 @@
         app:layout_constraintVertical_bias="0.036" />
 
     <Switch
-        android:id="@+id/o24r"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="396dp"
-        android:text="Over 24 Hour Reminder"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wua"
-        app:layout_constraintVertical_bias="0.372" />
-
-    <Switch
-        android:id="@+id/wua"
-        android:layout_width="249dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="440dp"
-        android:text="Wake-Up AutoFill"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyReminder"
-        app:layout_constraintVertical_bias="0.516" />
-
-    <Switch
         android:id="@+id/dailyReminder"
-        android:layout_width="249dp"
+        android:layout_width="239dp"
         android:layout_height="37dp"
         android:checked="false"
         android:text="Daily Reminder"
@@ -82,42 +37,30 @@
         app:layout_constraintTop_toBottomOf="@+id/text_settings2"
         app:layout_constraintVertical_bias="0.053" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="249dp"
-        android:layout_height="37dp"
-        android:text="Step Counter"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_settings"
-        app:layout_constraintVertical_bias="0.078" />
-
     <Button
         android:id="@+id/chooseTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:onClick="setNotTime"
         android:text="Choose Time"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyReminder" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyReminder"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/showTimeChosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="38dp"
         android:text="00:00"
-        app:layout_constraintBottom_toTopOf="@+id/wua"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.711"
         app:layout_constraintStart_toEndOf="@+id/chooseTime"
-        app:layout_constraintTop_toBottomOf="@+id/dailyReminder"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/chooseTime"
+        app:layout_constraintVertical_bias="0.517" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
