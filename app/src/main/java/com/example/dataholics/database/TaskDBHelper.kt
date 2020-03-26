@@ -92,7 +92,6 @@ class TaskDBHelper(context: Context) :
         return task
     }
 
-
     fun allTasks(): ArrayList<Task> {
         val db = this.readableDatabase
         var cursor: Cursor? = null
