@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_ACTIVITY
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_COMPANY
 import com.example.dataholics.database.DBContract.TaskEntry.Companion.COLUMN_TASK_ID
@@ -158,6 +159,7 @@ class TaskDBHelper(context: Context) :
     fun deleteAll(){
         val db = this.writableDatabase
         db.delete(TABLE_NAME, null, null)
+
     }
 
 }

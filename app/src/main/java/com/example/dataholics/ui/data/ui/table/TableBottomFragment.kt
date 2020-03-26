@@ -48,10 +48,12 @@ class TableBottomFragment : Fragment() {
         refresh()
         nextButton.setOnClickListener {
             textViewYear.text = (parseInt(textViewYear.text.toString()) + 1).toString()
+            displayYear = parseInt(textViewYear.text.toString())
             refresh()
         }
         previousButton.setOnClickListener {
             textViewYear.text = (parseInt(textViewYear.text.toString()) - 1).toString()
+            displayYear = parseInt(textViewYear.text.toString())
             refresh()
         }
         return root
@@ -75,7 +77,6 @@ class TableBottomFragment : Fragment() {
         val dbHelper = TaskDBHelper(context!!)
 
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(Color.rgb(254, 254, 254))
         colors.add(Color.rgb(0, 168, 244))
         colors.add(Color.rgb(52, 129, 55))
         colors.add(Color.rgb(255, 87, 34))
@@ -105,7 +106,8 @@ class TableBottomFragment : Fragment() {
 
 
         val lineDataSets = ArrayList<BarDataSet>()
-        val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework","Errands","Exercise","Travel","Social","Health","Dating")
+        val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework",
+                                    "Errands","Exercise","Travel","Social","Health","Dating")
         for (i in 1..12) {//month
             val lineEntries: ArrayList<BarEntry> = ArrayList()
             //for (j in 1..12) {//activity

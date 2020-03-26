@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
     var date = 0
     var time = 0
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -263,6 +264,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
     fun addTask(view: View) {
         val chooseTimeStart = findViewById<TextView>(R.id.chooseTimeStart)
         val chooseDate = findViewById<TextView>(R.id.chooseDate)
+        val durationTime = findViewById<TextView>(R.id.durationTime)
         var x = 0
         val timeCut = StringBuilder(2)
         timeCut.append(chooseTimeStart.text.toString()[0])
@@ -325,6 +327,14 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                 time++
                 x++
             }
+
+
+            if (time<10){
+                chooseTimeStart.text = "0$time:00"
+            }else {
+                chooseTimeStart.text = "$time:00"
+            }
+
             Toast.makeText(this@MainActivity, "Activity added for $x hour(s)", Toast.LENGTH_LONG)
                 .show()
         }

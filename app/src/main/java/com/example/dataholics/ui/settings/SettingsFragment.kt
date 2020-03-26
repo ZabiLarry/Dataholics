@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
@@ -32,6 +33,7 @@ class SettingsFragment : Fragment() {
 
         resetButton.setOnClickListener{
             dbHelper.deleteAll()
+            Toast.makeText(context, "Data reset", Toast.LENGTH_LONG).show()
         }
 
 

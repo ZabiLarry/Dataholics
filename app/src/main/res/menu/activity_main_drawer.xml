@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_equalizer_black_24dp"
             android:title="Data" />
 
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_today_black_24dp"
-            android:title="Google Calendar" />
     </group>
 
     <item android:title="Communicate">
