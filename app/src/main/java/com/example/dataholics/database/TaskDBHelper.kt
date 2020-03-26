@@ -154,4 +154,10 @@ class TaskDBHelper(context: Context) :
         db.close()
         return companyList
     }
+
+    fun deleteAll(){
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME, null, null)
+    }
+
 }

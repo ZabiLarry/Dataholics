@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
+import com.example.dataholics.database.TaskDBHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +27,13 @@ class SettingsFragment : Fragment() {
         settingsViewModel =
             ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
+        val dbHelper = TaskDBHelper(context!!)
+        val resetButton : Button = root.findViewById(R.id.resetButton)
+
+        resetButton.setOnClickListener{
+            dbHelper.deleteAll()
+        }
+
 
         /*val chooseTime:TextView = root.findViewById(R.id.showTimeChosen)
         chooseTime.setOnClickListener{

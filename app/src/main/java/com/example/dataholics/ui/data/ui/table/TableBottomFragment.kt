@@ -14,6 +14,7 @@ import com.example.dataholics.database.Task
 import com.example.dataholics.database.TaskDBHelper
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import java.lang.Integer.parseInt
+
 
 class TableBottomFragment : Fragment() {
 
@@ -57,7 +59,7 @@ class TableBottomFragment : Fragment() {
 
     private fun refresh() {
         monthValue = arrayOf(
-            floatArrayOf(100f, 30f, 30f, 40f, 0f, 20f, 20f, 20f, 10f, 60f, 0f, 20f),//jan
+            floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),//jan
             floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),//feb
             floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
             floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
@@ -73,6 +75,7 @@ class TableBottomFragment : Fragment() {
         val dbHelper = TaskDBHelper(context!!)
 
         val colors: ArrayList<Int> = ArrayList()
+        colors.add(Color.rgb(254, 254, 254))
         colors.add(Color.rgb(0, 168, 244))
         colors.add(Color.rgb(52, 129, 55))
         colors.add(Color.rgb(255, 87, 34))
