@@ -47,7 +47,7 @@ class HistogramBottomFragment : Fragment() {
     private fun refresh() {
         val dbHelper = TaskDBHelper(context!!)
         val companyValue = arrayOf(0f, 0f, 0f, 0f, 0f)
-        val companyList: ArrayList<Int> = ArrayList(dbHelper.getActivities())
+        val companyList: ArrayList<Int> = ArrayList(dbHelper.getCompanies())
         for (i in 0 until companyList.size) {
             when (companyList[i]) {
                 1 -> companyValue[0] = companyValue[0] + 1
@@ -59,7 +59,6 @@ class HistogramBottomFragment : Fragment() {
         }
 
         val barEntries: ArrayList<BarEntry> = ArrayList()
-
 
         for (i in companyValue.indices) {
             barEntries.add(BarEntry((i*2).toFloat(), companyValue[i]))

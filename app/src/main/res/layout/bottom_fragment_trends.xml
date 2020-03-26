@@ -29,7 +29,7 @@
         app:layout_constraintVertical_bias="0.042" />
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChartCompany"
+        android:id="@+id/lineChartTask"
         android:layout_width="407dp"
         android:layout_height="619dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,9 +42,10 @@
         android:id="@+id/textViewYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="2020"
         android:textSize="23dp"
-        app:layout_constraintBottom_toTopOf="@+id/lineChartCompany"
+        app:layout_constraintBottom_toTopOf="@+id/lineChartTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

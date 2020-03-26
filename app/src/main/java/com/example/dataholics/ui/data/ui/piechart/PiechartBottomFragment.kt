@@ -50,20 +50,8 @@ class PiechartBottomFragment : Fragment() {
         val activityName = arrayOf("Sleep","Eating","Leisure","School","Paid Job","Homework","Errands","Exercise","Travel","Social","Health","Dating")
         val activityList : ArrayList<Int> = ArrayList(dbHelper.getActivities())
         for (i  in 0 until activityList.size){
-            when (activityList[i]){
-                1 -> activityValue[0] = activityValue[0] + 1
-                2 -> activityValue[1] = activityValue[1] + 1
-                3 -> activityValue[2] = activityValue[2] + 1
-                4 -> activityValue[3] = activityValue[3] + 1
-                5 -> activityValue[4] = activityValue[4] + 1
-                6 -> activityValue[5] = activityValue[5] + 1
-                7 -> activityValue[6] = activityValue[6] + 1
-                8 -> activityValue[7] = activityValue[7] + 1
-                9 -> activityValue[8] = activityValue[8] + 1
-                10 -> activityValue[9] = activityValue[9] + 1
-                11 -> activityValue[10] = activityValue[10] + 1
-                12 -> activityValue[11] = activityValue[11] + 1
-            }
+            activityValue[activityList[i]-1] = activityValue[activityList[i]-1] + 1
+
         }
 
         val pieEntries : ArrayList<PieEntry> = ArrayList()

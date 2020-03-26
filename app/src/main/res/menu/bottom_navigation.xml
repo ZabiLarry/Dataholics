@@ -16,5 +16,6 @@
         android:icon="@drawable/ic_trending_up_black_24dp"
         android:title="Trends"
         />
+
   
 </menu>
