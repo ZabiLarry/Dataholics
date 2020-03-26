@@ -276,7 +276,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
                 dateAsArray.add(dataAsChar[i].toString().toInt())
             }
         }
-
+        date = 0;
         for (j in dateAsArray) {
             date = 10 * date + j
         }
@@ -321,7 +321,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
                 }
 
-                taskDBHelper.addTask(activity, company, 100 * date + time)
+                taskDBHelper.addTask(activity, company, (100 * date) + time)
                 time++
                 x++
             }

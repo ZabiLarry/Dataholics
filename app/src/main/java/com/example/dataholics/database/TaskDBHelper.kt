@@ -105,15 +105,14 @@ class TaskDBHelper(context: Context) :
         var activity: Int
 
         if (cursor.moveToFirst()) {
-            do {
+            while (!cursor.isAfterLast) {
                 taskID = cursor.getInt(cursor.getColumnIndex(COLUMN_TASK_ID))
                 company = cursor.getInt(cursor.getColumnIndex(COLUMN_COMPANY))
                 activity = cursor.getInt(cursor.getColumnIndex(COLUMN_ACTIVITY))
 
-
                 taskList.add(Task(taskID, company, activity))
                 cursor.moveToNext()
-            } while (cursor.moveToNext())
+            }
         }
         cursor.close()
         db.close()
