@@ -8,12 +8,11 @@
 
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/addActivity"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
         android:backgroundTint="#FF0000"
-        android:onClick="addTask"
         android:text="Add activity"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
