@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.053" />
 
     <Button
-        android:id="@+id/chooseTime"
+        android:id="@+id/chooseTimeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -56,11 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:00"
-        app:layout_constraintBottom_toBottomOf="@+id/chooseTime"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseTimeBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.711"
-        app:layout_constraintStart_toEndOf="@+id/chooseTime"
-        app:layout_constraintTop_toTopOf="@+id/chooseTime"
+        app:layout_constraintStart_toEndOf="@+id/chooseTimeBtn"
+        app:layout_constraintTop_toTopOf="@+id/chooseTimeBtn"
         app:layout_constraintVertical_bias="0.517" />
 
     <Button

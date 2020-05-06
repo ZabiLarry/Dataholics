@@ -28,13 +28,16 @@ class SettingsFragment : Fragment() {
         settingsViewModel =
             ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
-        val dbHelper = TaskDBHelper(context!!)
+        val dbHelper = context?.let { TaskDBHelper(it) }
         val resetButton : Button = root.findViewById(R.id.resetButton)
 
         resetButton.setOnClickListener{
-            dbHelper.deleteAll()
+            dbHelper!!.deleteAll()
             Toast.makeText(context, "Data reset", Toast.LENGTH_LONG).show()
         }
+
+
+
 
 
         /*val chooseTime:TextView = root.findViewById(R.id.showTimeChosen)

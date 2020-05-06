@@ -2,6 +2,7 @@ package com.example.dataholics.ui.input
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.dataholics.R
+import com.example.dataholics.database.Task
 import com.example.dataholics.database.TaskDBHelper
 import kotlinx.android.synthetic.main.fragment_input.*
 import java.lang.StringBuilder
@@ -106,44 +108,44 @@ class InputFragment : Fragment(), View.OnClickListener {
                     chooseDate.text = SimpleDateFormat("yyyy/MM/dd").format(cal.time)
                 }
             DatePickerDialog(
-                context!!, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+                this!!.requireContext(), dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
 
         addActivity.setOnClickListener {
-            addTask()
+            val timeCut = StringBuilder(2)
+            timeCut.append(chooseTimeStart.text.toString()[0])
+            timeCut.append(chooseTimeStart.text.toString()[1])
+            time = Integer.parseInt(timeCut.toString())
+            val dateAsArray = ArrayList<Int>()
+            val dataAsChar = chooseDate.text.toString().toCharArray();
+            //YYYY/MM/DD
+            for (i in 0..9) {
+                if (i != 4 && i != 7) {
+                    dateAsArray.add(dataAsChar[i].toString().toInt())
+                }
+            }
+            date = 0;
+            for (j in dateAsArray) {
+                date = 10 * date + j
+            }
+            addTask(activity, company, date, time, Integer.parseInt(durationTime.text.toString()))
         }
         return root
     }
 
-    private fun addTask() {
+    fun makeTask(id:Int, ac:Int, co:Int) : Task{ return Task(id, ac ,co)
 
+    }
+
+    public fun addTask(activity:Int, company:Int, dates:Int, times:Int, duration:Int) : Task {
         var x = 0
-        val timeCut = StringBuilder(2)
-        timeCut.append(chooseTimeStart.text.toString()[0])
-        timeCut.append(chooseTimeStart.text.toString()[1])
-        time = Integer.parseInt(timeCut.toString())
-        val dateAsArray = ArrayList<Int>()
-        val dataAsChar = chooseDate.text.toString().toCharArray();
-        //YYYY/MM/DD
-        for (i in 0..9) {
-            if (i != 4 && i != 7) {
-                dateAsArray.add(dataAsChar[i].toString().toInt())
-            }
-        }
-        date = 0;
-        for (j in dateAsArray) {
-            date = 10 * date + j
-        }
-
-        val taskDBHelper = TaskDBHelper(context!!)
-
         if (activity == 0 || company == 0) {
             Toast.makeText(context, "Activity or company not selected", Toast.LENGTH_LONG)
                 .show()
         } else {
-            while (x < Integer.parseInt(durationTime.text.toString())) {
+            while (x < duration) {
                 if (time >= 24) {
                     date++
                     time = 0
@@ -170,7 +172,7 @@ class InputFragment : Fragment(), View.OnClickListener {
                         date -= 1200
                     }
                 }
-                taskDBHelper.addTask(activity, company, (100 * date) + time)
+                context?.let { addTasktoDb(it) }
                 time++
                 x++
             }
@@ -179,102 +181,107 @@ class InputFragment : Fragment(), View.OnClickListener {
             } else {
                 chooseTimeStart.text = "$time:00"
             }
-
-            Toast.makeText(context, "Activity added for $x hour(s)", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(context, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()
         }//makes time an ID
+        return Task((100 * dates) + times, activity, company)
     }
 
-    fun selectChoice(view: View) {
-        when (view.id) {
+    private fun addTasktoDb(context : Context) {
+        val taskDBHelper = TaskDBHelper(context)
+        taskDBHelper.addTask(activity, company, (100 * date) + time)
+    }
+
+    public fun selectChoice(id:Int) : Int {
+        when (id) {
             R.id.sleep -> {
                 activity = 1
-                Toast.makeText(context!!, "Activity set to sleep", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Activity set to sleep", Toast.LENGTH_LONG).show()
             }
             R.id.eating -> {
                 activity = 2
-                Toast.makeText(context!!, "Activity set to eating", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to eating", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.leisure -> {
                 activity = 3
-                Toast.makeText(context!!, "Activity set to leisure", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to leisure", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.school -> {
                 activity = 4
-                Toast.makeText(context!!, "Activity set to school", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to school", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.paid_job -> {
                 activity = 5
-                Toast.makeText(context!!, "Activity set to paid job", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to paid job", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.hmwork -> {
                 activity = 6
-                Toast.makeText(context!!, "Activity set to homework", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to homework", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.errands -> {
                 activity = 7
-                Toast.makeText(context!!, "Activity set to errands", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to errands", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.exercise -> {
                 activity = 8
-                Toast.makeText(context!!, "Activity set to exercise", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to exercise", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.travel -> {
                 activity = 9
-                Toast.makeText(context!!, "Activity set to travel", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to travel", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.social -> {
                 activity = 10
-                Toast.makeText(context!!, "Activity set to social", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to social", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.health -> {
                 activity = 11
-                Toast.makeText(context!!, "Activity set to health", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to health", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.dating -> {
                 activity = 12
-                Toast.makeText(context!!, "Activity set to dating", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Activity set to dating", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.alone -> {
                 company = 1
-                Toast.makeText(context!!, "Company set to alone", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Company set to alone", Toast.LENGTH_LONG).show()
             }
             R.id.partner -> {
                 company = 2
-                Toast.makeText(context!!, "Company set to partner", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Company set to partner", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.friends -> {
                 company = 3
-                Toast.makeText(context!!, "Company set to friends", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Company set to friends", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.family -> {
                 company = 4
-                Toast.makeText(context!!, "Company set to family", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Company set to family", Toast.LENGTH_LONG)
                     .show()
             }
             R.id.coworkers -> {
                 company = 5
-                Toast.makeText(context!!, "Company set to co-workers", Toast.LENGTH_LONG)
+                Toast.makeText(context, "Company set to co-workers", Toast.LENGTH_LONG)
                     .show()
             }
         }
+        return id
     }
 
     override fun onClick(v: View?) {
-        selectChoice(v!!)
+        selectChoice(v!!.id)
 
     }
 
