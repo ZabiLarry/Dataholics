@@ -49,7 +49,7 @@ import java.util.*
 
 
 
-class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -89,43 +89,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         navView.setupWithNavController(navController)
     }
     // Notification----------------------------------------------------------------------------
-    fun setNotTime(view: View){
-        val timePicker : DialogFragment =
-            TimePickerFragment()
-        timePicker.show(supportFragmentManager, "time picker")
-    }
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        val showTime : TextView = findViewById(R.id.showTimeChosen)
-        showTime.text = ("Hour: " + hourOfDay + "Minute: " + minute)
 
-        val c = Calendar.getInstance()
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        c.set(Calendar.MINUTE, minute)
-        c.set(Calendar.SECOND, 0)
-
-        updateTimeText(c)
-        startNotification(c)
-    }
-    private fun updateTimeText(c:Calendar) {
-        var timeText : String = "Alarm set for: "
-        timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
-
-        showTimeChosen.text = timeText
-    }
-    private fun startNotification(c: Calendar) {
-        if(dailyReminder.isChecked) {
-            val alarmManager =
-                getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(this, AlertReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0)
-
-            if (c.before(Calendar.getInstance())) {
-                c.add(Calendar.DATE, 1)
-            }
-
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
-        }
-    }
 //--------------------------------------------------------------------------------------------------------
 
 
