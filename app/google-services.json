@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "390928871127",
+    "firebase_url": "https://lifelogapp-bluered.firebaseio.com",
+    "project_id": "lifelogapp-bluered",
+    "storage_bucket": "lifelogapp-bluered.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390928871127:android:dd93df4ff10d7800398a92",
+        "android_client_info": {
+          "package_name": "com.example.dataholics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390928871127-l44rqpf27sdr2n9e3na75isc48s88vml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6JS_4PII4fmS4RcXMkPDySc7qXf05xfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390928871127-l44rqpf27sdr2n9e3na75isc48s88vml.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "390928871127-89j2jilt7vs7ogv2pu18j08bogrmakg0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.blue-red.Lifelog"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
