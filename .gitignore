@@ -25,3 +25,5 @@ app/Dataholics-app.iml
 .gradle/5.6.4/fileHashes/fileHashes.bin
 .gradle/5.6.4/javaCompile/classAnalysis.bin
 .gradle/5.6.4/fileHashes/fileHashes.bin
+*.lock
+*.bin

@@ -15,8 +15,7 @@ import com.example.dataholics.MainActivity
 
 import com.example.dataholics.R
 import com.example.dataholics.ui.input.InputFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.fragment_create_account.*
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -84,27 +83,43 @@ class CreateAccountFragment : Fragment() {
             pass_viewC.requestFocus()
             return
         }
+        val checkuser: FirebaseAuthUserCollisionException? = null
 
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this.mainActivity) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                    val transaction = fragmentManager!!.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, InputFragment())
-                    transaction.commit()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(this.mainActivity, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
 
-                // ...
+            .addOnCompleteListener(this.mainActivity) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        task.exception
+                        Log.d(TAG, "createUserWithEmail:success")
+                        Toast.makeText(context, "Login successful!", Toast.LENGTH_LONG).show()
+                        val user = auth.currentUser
+                        updateUI(user)
+                        val transaction = fragmentManager!!.beginTransaction()
+                        transaction.replace(R.id.nav_host_fragment, InputFragment())
+                        transaction.commit()
+                    } else {
+                        try {
+                            throw task.exception!!
+                        }
+                        catch(exists: FirebaseAuthUserCollisionException) {
+                            email_viewC.error = "Email already registered"
+                        }
+                        catch (weakPassword : FirebaseAuthWeakPasswordException){
+                            pass_viewC.error = "Password is too weak, please use at least six characters"
+                        }
+                        catch (malformedEmail : FirebaseAuthInvalidCredentialsException){
+                            email_viewC.error = "Email is not setup correctly"
+                        }
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        //Toast.makeText(this.mainActivity, "Authentication failed.",
+                        //   Toast.LENGTH_SHORT).show()
+                        updateUI(null)
+                    }
+
             }
+
 
     }
     private fun updateUI(firebaseUser: FirebaseUser?){
