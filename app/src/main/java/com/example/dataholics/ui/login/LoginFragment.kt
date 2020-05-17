@@ -26,8 +26,9 @@ import com.example.dataholics.ui.input.InputFragment
 import com.example.dataholics.ui.input.InputViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_create_account.*
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -110,20 +111,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                    transaction.replace(R.id.nav_host_fragment, InputFragment())
                    transaction.commit()
                } else {
-                   try {
-                       throw task.exception!!
-                   }
-                   catch(exists: FirebaseAuthInvalidCredentialsException) {
-                       email_view.error = "The password is incorrect."
-                   }
-                   catch (malformedEmail : FirebaseAuthInvalidCredentialsException){
-                       email_view.error = "Email is not entered correctly."
-                   }
-                   catch (malformedEmail : FirebaseNetworkException){
-                       Toast.makeText(this.activity, "Network connection is currently not working.",
-                           Toast.LENGTH_SHORT).show()
-                   }
-
                    // If sign in fails, display a message to the user.
                    Log.w(TAG, "signInWithEmail:failure", task.exception)
                    Toast.makeText(this.activity, "Authentication failed.",
