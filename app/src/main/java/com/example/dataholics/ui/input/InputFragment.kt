@@ -21,11 +21,12 @@ import java.util.*
 class InputFragment : Fragment(), View.OnClickListener {
 
     private lateinit var inputViewModel: InputViewModel
-    var date = 0
-    var time = 0
-    var activity = 0
-    var company = 0
+    var date = 20200505
+    var time = 21
+    private var activity = 1
+    private var company = 1
     var root: View? = null
+    //val vs var
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -139,145 +140,165 @@ class InputFragment : Fragment(), View.OnClickListener {
 
     }
 
-    public fun addTask(activity:Int, company:Int, dates:Int, times:Int, duration:Int) : Task {
+    fun getDate(times: Int, dates:Int): Int{
+        if (time >= 24) {
+            date++
+            time = 0
+            if ((date % 100) > 28) {
+                if ((date % 10000) / 100 == 2) {
+                    date += 100
+                    date -= 28
+                }
+            }
+            if ((date % 100) > 30) {
+                if ((date % 10000) / 100 == 4 && (date % 10000) / 100 == 6 && (date % 10000) / 100 == 9
+                    && (date % 10000) / 100 == 11
+                ) {
+                    date += 100
+                    date -= 30
+                }
+            }
+            if (date % 100 > 31) {
+                date += 100
+                date -= 31
+            }
+            if ((date % 10000) / 100 > 12) {
+                date += 10000
+                date -= 1200
+            }
+        }
+        return (dates*100)+times
+    }
+
+    fun addTask(activity:Int, company:Int, dates:Int, times:Int, duration:Int) : Task {
         var x = 0
         if (activity == 0 || company == 0) {
             Toast.makeText(context, "Activity or company not selected", Toast.LENGTH_LONG)
                 .show()
         } else {
             while (x < duration) {
-                if (time >= 24) {
-                    date++
-                    time = 0
-                    if ((date % 100) > 28) {
-                        if ((date % 10000) / 100 == 2) {
-                            date += 100
-                            date -= 28
-                        }
-                    }
-                    if ((date % 100) > 30) {
-                        if ((date % 10000) / 100 == 4 && (date % 10000) / 100 == 6 && (date % 10000) / 100 == 9
-                            && (date % 10000) / 100 == 11
-                        ) {
-                            date += 100
-                            date -= 30
-                        }
-                    }
-                    if (date % 100 > 31) {
-                        date += 100
-                        date -= 31
-                    }
-                    if ((date % 10000) / 100 > 12) {
-                        date += 10000
-                        date -= 1200
-                    }
-                }
+                getDate(0,0)
                 context?.let { addTasktoDb(it) }
                 time++
                 x++
             }
-            if (time < 10) {
+            /*if (time < 10) {
                 chooseTimeStart.text = "0$time:00"
             } else {
                 chooseTimeStart.text = "$time:00"
             }
-            Toast.makeText(context, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Activity added for $x hour(s)", Toast.LENGTH_LONG).show()*/
         }//makes time an ID
         return Task((100 * dates) + times, activity, company)
     }
 
-    private fun addTasktoDb(context : Context) {
+    private fun addTasktoDb(context: Context) {
         val taskDBHelper = TaskDBHelper(context)
         taskDBHelper.addTask(activity, company, (100 * date) + time)
     }
 
-    public fun selectChoice(id:Int) : Int {
+    public fun selectChoice(id:Int) : String {
         when (id) {
             R.id.sleep -> {
                 activity = 1
                 Toast.makeText(context, "Activity set to sleep", Toast.LENGTH_LONG).show()
+                return id.toString()
             }
             R.id.eating -> {
                 activity = 2
-                Toast.makeText(context, "Activity set to eating", Toast.LENGTH_LONG)
-                    .show()
+                //Toast.makeText(context, "Activity set to eating", Toast.LENGTH_LONG).show()
+                return id.toString()
             }
             R.id.leisure -> {
                 activity = 3
                 Toast.makeText(context, "Activity set to leisure", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.school -> {
                 activity = 4
                 Toast.makeText(context, "Activity set to school", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.paid_job -> {
                 activity = 5
                 Toast.makeText(context, "Activity set to paid job", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.hmwork -> {
                 activity = 6
                 Toast.makeText(context, "Activity set to homework", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.errands -> {
                 activity = 7
                 Toast.makeText(context, "Activity set to errands", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.exercise -> {
                 activity = 8
                 Toast.makeText(context, "Activity set to exercise", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.travel -> {
                 activity = 9
                 Toast.makeText(context, "Activity set to travel", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.social -> {
                 activity = 10
                 Toast.makeText(context, "Activity set to social", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.health -> {
                 activity = 11
                 Toast.makeText(context, "Activity set to health", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.dating -> {
                 activity = 12
                 Toast.makeText(context, "Activity set to dating", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.alone -> {
                 company = 1
                 Toast.makeText(context, "Company set to alone", Toast.LENGTH_LONG).show()
+                return id.toString()
             }
             R.id.partner -> {
                 company = 2
-                Toast.makeText(context, "Company set to partner", Toast.LENGTH_LONG)
-                    .show()
+                //Toast.makeText(context, "Company set to partner", Toast.LENGTH_LONG).show()
+                return id.toString()
             }
             R.id.friends -> {
                 company = 3
                 Toast.makeText(context, "Company set to friends", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.family -> {
                 company = 4
                 Toast.makeText(context, "Company set to family", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
             R.id.coworkers -> {
                 company = 5
                 Toast.makeText(context, "Company set to co-workers", Toast.LENGTH_LONG)
                     .show()
+                return id.toString()
             }
         }
-        return id
+        return "error"
     }
 
     override fun onClick(v: View?) {

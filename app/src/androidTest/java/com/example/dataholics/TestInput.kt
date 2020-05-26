@@ -44,12 +44,29 @@ class TestInput {
         onView(withId(R.id.durationTime)).perform((typeText("1")))
 
         val task = Task(2020050521,1, 1)
-        assertEquals(input.addTask(1,1,20200505, 21, 1), task)
+        val tasktest = input.addTask(1,1,20200505, 21, 1)
+        assertEquals(tasktest.TaskId, task.TaskId)
     }
 
 
     @Test
     fun selectChoiceTest(){
+        input = InputFragment()
+        var choice = input.selectChoice(R.id.eating)
+        assertEquals("2131230854", choice)
+
+        choice = input.selectChoice(R.id.partner)
+        assertEquals("2131230986", choice)
+
+
 
     }
+    @Test
+    fun makeId(){
+        input = InputFragment()
+        val date = 2020050521
+        val dateTest : Int = input.getDate(21,20200505)
+        assertEquals(dateTest, date)
+    }
+
 }
