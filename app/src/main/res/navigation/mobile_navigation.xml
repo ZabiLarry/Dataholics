@@ -46,4 +46,17 @@
         android:name="com.example.dataholics.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.dataholics.ui.login.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_nav_login_to_nav_create_account"
+            app:destination="@id/nav_create_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_create_account"
+        android:name="com.example.dataholics.ui.create_account.CreateAccountFragment"
+        android:label="create account"
+        tools:layout="@layout/fragment_create_account" />
 </navigation>

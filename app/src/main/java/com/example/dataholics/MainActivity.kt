@@ -31,6 +31,7 @@ import com.example.dataholics.database.DBContract
 import com.example.dataholics.database.Task
 import com.example.dataholics.database.TaskDBHelper
 import com.example.dataholics.ui.data.ui.histogram.PiechartBottomFragment
+import com.example.dataholics.ui.login.LoginFragment
 import com.example.dataholics.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_create_account.view.*
@@ -38,10 +39,9 @@ import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.android.synthetic.main.fragment_input.view.*
 import kotlinx.android.synthetic.main.fragment_input.view.chooseDate
 import kotlinx.android.synthetic.main.nav_header_main.*
-
 import java.lang.StringBuilder
-
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.text.DateFormat
@@ -52,9 +52,10 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-
-
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    fun getAuth(): FirebaseAuth {
+        return auth
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        auth = FirebaseAuth.getInstance()
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
             super.onBackPressed()
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
             setOf(
                 R.id.nav_profile, R.id.nav_data, R.id.nav_input, R.id.nav_settings,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_export
+                R.id.nav_tools, R.id.nav_share, R.id.nav_export, R.id.nav_login, R.id.nav_create_account
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -124,5 +125,3 @@ class MainActivity : AppCompatActivity() {
 private fun Any.replace(navHostFragmentContainer: Int, selectedFragment: Fragment) {
 
 }
-
-
