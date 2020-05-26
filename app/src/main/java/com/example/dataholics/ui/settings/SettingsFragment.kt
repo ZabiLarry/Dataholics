@@ -23,7 +23,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SettingsFragment : Fragment(){
+class SettingsFragment : Fragment() {
 
     private lateinit var settingsViewModel: SettingsViewModel
 
@@ -36,19 +36,19 @@ class SettingsFragment : Fragment(){
             ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
         val dbHelper = context?.let { TaskDBHelper(it) }
-        val resetButton : Button = root.findViewById(R.id.resetButton)
-        val chooseTimeBtn :Button = root.findViewById(R.id.chooseTimeBtn)
-        val showTimeChosen : TextView = root.findViewById(R.id.showTimeChosen)
+        val resetButton: Button = root.findViewById(R.id.resetButton)
+        val chooseTimeBtn: Button = root.findViewById(R.id.chooseTimeBtn)
+        val showTimeChosen: TextView = root.findViewById(R.id.showTimeChosen)
         val cal = Calendar.getInstance()
 
-        resetButton.setOnClickListener{
+        resetButton.setOnClickListener {
             dbHelper!!.deleteAll()
             Toast.makeText(context, "Data reset", Toast.LENGTH_LONG).show()
         }
 
         showTimeChosen.setOnClickListener {
             val timeSetListener =
-                TimePickerDialog.OnTimeSetListener { timePicker: TimePicker, hour: Int, min : Int ->
+                TimePickerDialog.OnTimeSetListener { timePicker: TimePicker, hour: Int, min: Int ->
                     cal.set(Calendar.HOUR_OF_DAY, hour)
                     cal.set(Calendar.MINUTE, min)
                     showTimeChosen.text = SimpleDateFormat("HH:mm").format(cal.time)
@@ -82,7 +82,7 @@ class SettingsFragment : Fragment(){
 
 
     private fun startNotification(c: Calendar) {
-        if(dailyReminder.isChecked) {
+        if (dailyReminder.isChecked) {
             val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, AlertReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0)
