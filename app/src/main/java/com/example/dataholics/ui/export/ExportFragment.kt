@@ -70,7 +70,7 @@ class ExportFragment : Fragment() {
         piechartActivity = root!!.findViewById(R.id.piechartActivity)
         piechartActivity.isRotationEnabled = true
         barChartCompany = root!!.findViewById(R.id.barChartCompany)
-       // lineChartTask = root!!.findViewById(R.id.lineChartTask)
+        // lineChartTask = root!!.findViewById(R.id.lineChartTask)
         // lineChartTask = root!!.findViewById(R.id.lineChartTask)
         exportButton.setOnClickListener {
             export()
@@ -79,21 +79,18 @@ class ExportFragment : Fragment() {
         return root
     }
 
-    private fun export() {
+    fun export() {
         piechartActivity = pieChart()
         val pie: Bitmap = piechartActivity.drawToBitmap()
         barChartCompany = barChart()
         val bar: Bitmap = barChartCompany.drawToBitmap()
-       // lineChartTask = lineChart()
+        // lineChartTask = lineChart()
         //val line : Bitmap = lineChartTask.drawToBitmap()
         newPDF(pie, "/pieChart.pdf")
         newPDF(bar, "/barChart.pdf")
         //newPDF(line, "/lineChart.pdf")
         Toast.makeText(context, "Exported to your documents file", Toast.LENGTH_LONG).show()
     }
-
-
-
 
 
     private fun newPDF(chart: Bitmap, fileName: String) {
@@ -121,6 +118,14 @@ class ExportFragment : Fragment() {
             doc.close();
         }
 
+    }
+
+    fun isOpen(): Boolean {
+        val doc = Document(PageSize.A4)
+        doc.open()
+        val connected =  doc.isOpen
+        doc.close()
+        return connected
     }
 
     private fun pieChart(): PieChart {

@@ -55,7 +55,11 @@ class TaskDBHelper(context: Context) :
 
         db.close()
 
+    }
 
+    fun openOrClosed(): Boolean{
+        val db = writableDatabase
+        return db.isOpen
     }
 
     fun deleteTask(id: String): Int {
